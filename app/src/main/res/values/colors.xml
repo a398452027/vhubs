@@ -9,4 +9,5 @@
     <color name="nav_bg">#1C122D</color>
     <color name="main_bg">#61276b</color>
     <color name="nav_item_p">#181028</color>
+    <color name="home_move_name_bg">#d829122d</color>
 </resources>

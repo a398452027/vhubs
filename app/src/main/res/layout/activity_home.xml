@@ -14,6 +14,60 @@
             android:layout_height="match_parent"
             android:background="@color/main_bg"
             android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@drawable/side_nav_bar"
+                android:layout_height="@dimen/select_tab">
+                <RelativeLayout
+                    android:id="@+id/tab_0"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/select_iv0"
+                        android:background="@drawable/select_bar_bg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:textColor="@color/text_pink"
+                        android:text="@string/featured"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/tab_1"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/select_iv1"
+                        android:background="@drawable/select_bar_bg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:textColor="@color/text_pink"
+                        android:text="@string/classification"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v4.view.ViewPager>
 
 
         </LinearLayout>
