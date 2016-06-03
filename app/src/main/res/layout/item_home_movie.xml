@@ -18,11 +18,13 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:src="@mipmap/hot"
                 android:id="@+id/title_iv"
                 android:layout_width="30dp"
-                android:layout_height="30dp" />
+                android:layout_height="match_parent" />
 
             <TextView
+                android:id="@+id/title_name"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -45,8 +47,10 @@
                     android:textColor="@color/text_blue" />
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
+                    android:src="@mipmap/more_arrow"
+                    android:layout_width="15dp"
+                    android:paddingLeft="5dp"
+                    android:layout_height="match_parent" />
             </LinearLayout>
 
         </LinearLayout>
@@ -55,7 +59,6 @@
             android:id="@+id/ll_01"
             android:layout_width="match_parent"
             android:layout_height="@dimen/home_movie_h"
-            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <RelativeLayout
@@ -93,8 +96,9 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:src="@mipmap/good"
                             android:layout_width="15dp"
-                            android:layout_height="15dp" />
+                            android:layout_height="match_parent" />
 
                         <TextView
                             android:id="@+id/good_01"
@@ -156,8 +160,9 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:src="@mipmap/good"
                             android:layout_width="15dp"
-                            android:layout_height="15dp" />
+                            android:layout_height="match_parent" />
 
                         <TextView
                             android:id="@+id/good_02"
@@ -219,8 +224,9 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:src="@mipmap/good"
                             android:layout_width="15dp"
-                            android:layout_height="15dp" />
+                            android:layout_height="match_parent" />
 
                         <TextView
                             android:id="@+id/good_03"
@@ -292,8 +298,9 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:src="@mipmap/good"
                             android:layout_width="15dp"
-                            android:layout_height="15dp" />
+                            android:layout_height="match_parent" />
 
                         <TextView
                             android:id="@+id/good_04"
@@ -355,8 +362,9 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:src="@mipmap/good"
                             android:layout_width="15dp"
-                            android:layout_height="15dp" />
+                            android:layout_height="match_parent" />
 
                         <TextView
                             android:id="@+id/good_05"
@@ -418,8 +426,9 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:src="@mipmap/good"
                             android:layout_width="15dp"
-                            android:layout_height="15dp" />
+                            android:layout_height="match_parent" />
 
                         <TextView
                             android:id="@+id/good_06"

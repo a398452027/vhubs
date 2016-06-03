@@ -14,6 +14,9 @@
 
     <string name="featured">Featured</string>
     <string name="classification">Classification</string>
+
+    <string name="hot_type">Hot</string>
+    <string name="new_type">New</string>
     <string name="bottom_load_loading">正在加载</string>
     <string name="bottom_load_loadmore">加载更多</string>
     <string name="bottom_load_nomore">后面没有了</string>
@@ -26,4 +29,8 @@
 
     <string name="more">更多</string>
 
+    <string name="net_fail">网络中断</string>
+    <string name="hot_movie">热门影片</string>
+    <string name="hot_classification">热门类型</string>
+    <string name="all_classification">所有类型</string>
 </resources>

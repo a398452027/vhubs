@@ -5,8 +5,6 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.TextViewCompat;
@@ -14,7 +12,6 @@ import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -33,13 +30,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import org.gtq.vhubs.R;
-import org.gtq.vhubs.utils.SystemUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import support.ui.frt.BaseFrtFactory;
+import support.utils.SystemUtils;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -86,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mLvLeftMenu.setOnItemClickListener(this);
         status_bar = findViewById(R.id.status_bar);
         LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) status_bar.getLayoutParams();
-        lp.height = SystemUtil.getStatuBarHeight(this);
+        lp.height = SystemUtils.getStatusBarHeight(this);
         status_bar.setLayoutParams(lp);
 
         fragments = new ArrayList<>();

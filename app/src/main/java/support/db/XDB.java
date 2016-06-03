@@ -84,7 +84,7 @@ public class XDB {
         SQLiteDatabase db = dm.lockWritableDatabase();
         final String tableName = getTableName(item);
         try {
-            db.delete(tableName, "id='" + item.getId() + "'", null);
+            db.delete(tableName, "id='" + item.getmId() + "'", null);
         } catch (Exception e) {
 
         } finally {
@@ -113,9 +113,9 @@ public class XDB {
         try {
             cv.put("data", SystemUtils.objectToByteArray(item));
             int ret = db.update(tableName, cv,
-                    "id='" + item.getId() + "'", null);
+                    "id='" + item.getmId() + "'", null);
             if (ret <= 0) {
-                cv.put("id", item.getId());
+                cv.put("id", item.getmId());
                 db.insert(tableName, null, cv);
             }
         } catch (Exception e) {
@@ -126,7 +126,7 @@ public class XDB {
                         "id" + " TEXT PRIMARY KEY, " +
                         "data" + " BLOB);");
                 if (cv.size() > 0) {
-                    cv.put("id", item.getId());
+                    cv.put("id", item.getmId());
                     db.insert(tableName, null, cv);
                 }
             }

@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <View
         android:id="@+id/status_bar"
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:background="@drawable/side_nav_bar" />
+        android:background="@drawable/side_nav_bar"/>
 
-    <android.support.v4.widget.DrawerLayout xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/drawer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:openDrawer="start">
+    <android.support.v4.widget.DrawerLayout android:id="@+id/drawer_layout"
+                                            xmlns:tools="http://schemas.android.com/tools"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            tools:openDrawer="start">
 
 
         <include
             layout="@layout/app_bar_main"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
 
         <ListView
             android:id="@+id/nav_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="left"
-            android:divider="@android:color/transparent"
-            android:background="@color/nav_bg" />
+            android:background="@color/nav_bg"
+            android:divider="@android:color/transparent"/>
 
     </android.support.v4.widget.DrawerLayout>
 

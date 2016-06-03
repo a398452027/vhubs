@@ -87,7 +87,7 @@ public abstract class SetBaseAdapter<E extends Object> extends BaseAdapter {
                 int index = 0;
                 for (Object o : mListObject) {
                     IDObject ido = (IDObject) o;
-                    if (ido.getId().equals(id)) {
+                    if (ido.getmId().equals(id)) {
                         mListObject.remove(index);
                         notifyDataSetChanged();
                         break;
@@ -104,7 +104,7 @@ public abstract class SetBaseAdapter<E extends Object> extends BaseAdapter {
             if (item instanceof IDObject) {
                 for (Object o : mListObject) {
                     IDObject ido = (IDObject) o;
-                    if (ido.getId().equals(id)) {
+                    if (ido.getmId().equals(id)) {
                         return o;
                     }
                 }

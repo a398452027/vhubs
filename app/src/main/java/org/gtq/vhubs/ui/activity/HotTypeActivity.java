@@ -16,7 +16,6 @@ import org.gtq.vhubs.R;
 import org.gtq.vhubs.core.VApplication;
 import org.gtq.vhubs.dao.ClassificationItem;
 import org.gtq.vhubs.ui.adapter.ClassificationAdapter;
-import org.gtq.vhubs.ui.adapter.HomeListAdapter;
 import org.gtq.vhubs.utils.HttpUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,10 +34,11 @@ import support.ui.view.ScrollBottomLoadListView;
 import support.utils.SystemUtils;
 
 /**
- * Created by guo on 2016/5/28.
+ * Created by guotengqian on 2016/6/1.
  */
-public class ClassificationActivity extends VBaseActivity implements ScrollBottomLoadListView.OnScrollBottomListener,
-        PulldownableListView.OnPullDownListener, SetBaseAdapter.OnItemViewClickListener, View.OnClickListener {
+public class HotTypeActivity extends VBaseActivity  implements ScrollBottomLoadListView.OnScrollBottomListener,
+        PulldownableListView.OnPullDownListener, SetBaseAdapter.OnItemViewClickListener, View.OnClickListener{
+
     ScrollBottomLoadListView lv;
     View headView;
     ClassificationAdapter classificationAdapter;

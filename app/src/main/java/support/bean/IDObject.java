@@ -18,7 +18,7 @@ public class IDObject implements Serializable{
 			return true;
 		}
 		if(o != null && getClass().isInstance(o)){
-			return getId().equals(((IDObject)o).getId());
+			return getmId().equals(((IDObject)o).getmId());
 		}
 		return false;
 	}
@@ -26,10 +26,10 @@ public class IDObject implements Serializable{
 	@Override
 	public int hashCode() {
 
-		return getId().hashCode();
+		return getmId().hashCode();
 	}
 
-	public String getId(){
+	public String getmId(){
 		return mId;
 	}
 }
