@@ -90,7 +90,7 @@ public class HomeListAdapter extends SetBaseAdapter<HomeListItem> implements Vie
         holder.more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onItemViewClickListener.onItemViewClick(v,position);
+                onItemViewClickListener.onItemViewClick(v, position);
             }
         });
         for (int i = 0; i < homeListItem.getMovices().size(); i++) {
@@ -139,8 +139,8 @@ public class HomeListAdapter extends SetBaseAdapter<HomeListItem> implements Vie
         VApplication.setBitmapEx(movie_iv, data.getCover_img());
         name.setText(data.getName());
         good.setText(data.getGrade());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm");
-        time.setText(simpleDateFormat.format(new Date(Long.valueOf(data.getDuration()))));
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+        time.setText(simpleDateFormat.format(new Date(Integer.valueOf(data.getDuration())*1000)));
     }
 
     public class ViewHolder {

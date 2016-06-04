@@ -41,6 +41,7 @@ import rx.schedulers.Schedulers;
 import support.ui.activity.VBaseActivity;
 import support.ui.adapter.SetBaseAdapter;
 import support.ui.view.PageIndicator;
+import support.ui.view.PullToRefreshListView;
 import support.ui.view.PulldownableListView;
 import support.ui.view.ScrollBottomLoadListView;
 
@@ -52,7 +53,7 @@ public class FeaturedActivity extends VBaseActivity implements ScrollBottomLoadL
 
     ViewPager vp;
     PageIndicator pi;
-    ScrollBottomLoadListView lv;
+    PullToRefreshListView lv;
     View headView;
     int page = 0;
     ImageView loading;
@@ -64,8 +65,8 @@ public class FeaturedActivity extends VBaseActivity implements ScrollBottomLoadL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_featured);
 
-        lv = (ScrollBottomLoadListView) findViewById(R.id.lv);
-        lv.setIsAutoLoad(false);
+        lv = (PullToRefreshListView) findViewById(R.id.lv);
+
         headView = LayoutInflater.from(this).inflate(R.layout.view_home_header, null);
         pi = (PageIndicator) headView.findViewById(R.id.pi);
         vp = (ViewPager) headView.findViewById(R.id.vp);
@@ -75,7 +76,6 @@ public class FeaturedActivity extends VBaseActivity implements ScrollBottomLoadL
         lv.setAdapter(homeListAdapter);
         lv.startRun();
 
-        lv.setOnScrollBottomListener(this);
         lv.setOnPullDownListener(this);
     }
 

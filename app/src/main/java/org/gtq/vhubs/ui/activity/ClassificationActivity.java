@@ -30,6 +30,7 @@ import rx.schedulers.Schedulers;
 import support.ui.activity.VBaseActivity;
 import support.ui.adapter.SetBaseAdapter;
 import support.ui.image.GImageLoader;
+import support.ui.view.PullToRefreshListView;
 import support.ui.view.PulldownableListView;
 import support.ui.view.ScrollBottomLoadListView;
 import support.utils.SystemUtils;
@@ -39,7 +40,7 @@ import support.utils.SystemUtils;
  */
 public class ClassificationActivity extends VBaseActivity implements ScrollBottomLoadListView.OnScrollBottomListener,
         PulldownableListView.OnPullDownListener, SetBaseAdapter.OnItemViewClickListener, View.OnClickListener {
-    ScrollBottomLoadListView lv;
+    PullToRefreshListView lv;
     View headView;
     ClassificationAdapter classificationAdapter;
 
@@ -47,15 +48,15 @@ public class ClassificationActivity extends VBaseActivity implements ScrollBotto
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classification);
-        lv = (ScrollBottomLoadListView) findViewById(R.id.lv);
-        lv.setIsAutoLoad(false);
+        lv = (PullToRefreshListView) findViewById(R.id.lv);
+
         headView = LayoutInflater.from(this).inflate(R.layout.view_classification_head, null);
         lv.addHeaderView(headView);
         classificationAdapter = new ClassificationAdapter(this, this);
         lv.setAdapter(classificationAdapter);
         lv.startRun();
 
-        lv.setOnScrollBottomListener(this);
+
         lv.setOnPullDownListener(this);
     }
 

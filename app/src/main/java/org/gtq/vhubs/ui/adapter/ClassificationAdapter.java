@@ -82,12 +82,13 @@ public class ClassificationAdapter extends SetBaseAdapter<ClassificationItem.Nor
         }
         switch (list.size()){
             case 1:
-                holder.ll02.setVisibility(View.GONE);
-                holder.ll03.setVisibility(View.GONE);
+                holder.ll02.setVisibility(View.INVISIBLE);
+                holder.ll03.setVisibility(View.INVISIBLE);
                 break;
             case 2:
                 holder.ll02.setVisibility(View.VISIBLE);
-                holder.ll03.setVisibility(View.GONE);
+                holder.ll03.setVisibility(View.INVISIBLE
+                );
                 break;
             case 3:
                 holder.ll02.setVisibility(View.VISIBLE);
@@ -143,6 +144,7 @@ public class ClassificationAdapter extends SetBaseAdapter<ClassificationItem.Nor
         return oList.get(position);
     }
 
+
     @Override
     public void replaceAll(Collection<ClassificationItem.NormalsBean> collection) {
 
@@ -160,7 +162,7 @@ public class ClassificationAdapter extends SetBaseAdapter<ClassificationItem.Nor
     }
 
     private void initOList(List<ClassificationItem.NormalsBean> collection) {
-        for (int i = 0; i < collection.size(); i++) {
+        for (int i = 0; i < collection.size(); ) {
             List<ClassificationItem.NormalsBean> list = new ArrayList<>();
             for (int j = 0; j < 3; j++) {
                 list.add(collection.get(i));

@@ -3,11 +3,14 @@
     <color name="colorPrimary">#00000000</color>
     <color name="colorPrimaryDark">#5e3373</color>
     <color name="colorAccent">#FF4081</color>
-    
+
+    <color name="bg_white">#20ffffff</color>
+    <color name="text_white">#60ffffff</color>
     <color name="text_pink">#FAD9F6</color>
     <color name="text_blue">#abeafe</color>
     <color name="nav_bg">#1C122D</color>
     <color name="main_bg">#61276b</color>
+    <color name="h_movie_white">#81478b</color>
     <color name="nav_item_p">#181028</color>
     <color name="home_move_name_bg">#d829122d</color>
 </resources>

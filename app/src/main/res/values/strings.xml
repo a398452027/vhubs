@@ -33,4 +33,8 @@
     <string name="hot_movie">热门影片</string>
     <string name="hot_classification">热门类型</string>
     <string name="all_classification">所有类型</string>
+
+    <string name="view_num">观看次数：%s</string>
+    <string name="creat_time">创建时间：%s</string>
+    <string name="fail_search">未找到相关影片</string>
 </resources>

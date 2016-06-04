@@ -1,23 +1,26 @@
 package org.gtq.vhubs.ui.activity;
 
-import android.graphics.Bitmap;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.nostra13.universalimageloader.core.assist.FailReason;
 
 import org.gtq.vhubs.R;
 import org.gtq.vhubs.core.VApplication;
-import org.gtq.vhubs.dao.ClassificationItem;
-import org.gtq.vhubs.dao.MovieForType;
-import org.gtq.vhubs.ui.adapter.ClassificationAdapter;
-import org.gtq.vhubs.ui.adapter.MovieForTypeAdapter;
+import org.gtq.vhubs.dao.HMoiveItem;
+import org.gtq.vhubs.dao.HotKey;
+import org.gtq.vhubs.ui.adapter.HMoiveAdapter;
 import org.gtq.vhubs.utils.HttpUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,39 +37,65 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import support.ui.activity.VBaseActivity;
 import support.ui.adapter.SetBaseAdapter;
-import support.ui.frt.BaseFrt;
-import support.ui.image.GImageLoader;
 import support.ui.view.PulldownableListView;
 import support.ui.view.ScrollBottomLoadListView;
-import support.utils.SystemUtils;
 
 /**
- * Created by guotengqian on 2016/6/1.
+ * Created by guo on 2016/6/4.
  */
-public class HotTypeActivity extends VBaseActivity implements ScrollBottomLoadListView.OnScrollBottomListener,
-        PulldownableListView.OnPullDownListener, SetBaseAdapter.OnItemViewClickListener, View.OnClickListener {
+public class SearchResultActivity extends VBaseActivity implements View.OnClickListener, ScrollBottomLoadListView.OnScrollBottomListener,
+        PulldownableListView.OnPullDownListener, SetBaseAdapter.OnItemViewClickListener {
+    EditText edit;
 
+    ImageView back;
+    ImageView search;
+
+    String key;
     ScrollBottomLoadListView lv;
-
-    MovieForTypeAdapter movieForTypeAdapter;
-    String typeId;
-    int page;
+    HMoiveAdapter adapter;
+    int page = 1;
+    TextView fail_tv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        key = getIntent().getStringExtra("key");
         super.onCreate(savedInstanceState);
-        typeId = getIntent().getStringExtra(BaseFrt.FRTTAG_NAME);
-        setContentView(R.layout.activity_hottype);
+        setContentView(R.layout.activity_searchresult);
+        initView();
+
+
+    }
+
+    private void initView() {
+
+        fail_tv = (TextView) findViewById(R.id.fail_tv);
+
+        edit = (EditText) findViewById(R.id.edit);
+        edit.setText(key);
+        edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_SEARCH) {
+                    search();
+                }
+                return false;
+            }
+        });
+
+        back = (ImageView) findViewById(R.id.back);
+        back.setOnClickListener(this);
+        search = (ImageView) findViewById(R.id.search);
+        search.setOnClickListener(this);
         lv = (ScrollBottomLoadListView) findViewById(R.id.lv);
-
-        movieForTypeAdapter = new MovieForTypeAdapter(this, this);
-        lv.setAdapter(movieForTypeAdapter);
         lv.startRun();
-
+        adapter = new HMoiveAdapter(this, this);
+        lv.setAdapter(adapter);
         lv.setOnScrollBottomListener(this);
         lv.setOnPullDownListener(this);
+
     }
-    private void loadMoreData(){
+
+    private void searchMore() {
         Observable.just("").doOnSubscribe(new Action0() {
             @Override
             public void call() {
@@ -79,7 +108,8 @@ public class HotTypeActivity extends VBaseActivity implements ScrollBottomLoadLi
 
 
                         try {
-                            return new JSONObject(HttpUtils.doPost("category", "hotMovices", typeId,page+""));
+
+                            return new JSONObject(HttpUtils.doPost("movice", "search", edit.getText().toString(), page + ""));
                         } catch (Exception e) {
                             VApplication.toast(getString(R.string.net_fail));
                         }
@@ -90,20 +120,21 @@ public class HotTypeActivity extends VBaseActivity implements ScrollBottomLoadLi
                     @Override
                     public void call(JSONObject bean) {
                         lv.setVisibility(View.VISIBLE);
-                        lv.endRun();
+                        lv.endLoad();
                         try {
                             if (bean.getInt("code") != 0) {
                                 VApplication.toastJsonError(bean);
                             } else {
                                 page++;
                                 JSONArray jsonArray = bean.getJSONArray("data");
-                                List<MovieForType> list = new ArrayList<MovieForType>();
+                                List<HMoiveItem> list = new ArrayList<HMoiveItem>();
                                 for (int i = 0; i < jsonArray.length(); i++) {
-                                    MovieForType movieForType = JSON.parseObject(jsonArray.getJSONObject(i)
-                                            .toString(), MovieForType.class);
-                                    list.add(movieForType);
+                                    HMoiveItem hMoiveItem = JSON.parseObject(jsonArray.getJSONObject(i)
+                                            .toString(), HMoiveItem.class);
+                                    list.add(hMoiveItem);
                                 }
-                                movieForTypeAdapter.addAll(list);
+
+                                adapter.addAll(list);
                             }
                         } catch (JSONException e) {
                             VApplication.toast(getString(R.string.net_fail));
@@ -119,7 +150,16 @@ public class HotTypeActivity extends VBaseActivity implements ScrollBottomLoadLi
                 });
     }
 
-    private void loadDataFornet() {
+    private void search() {
+        try {
+            JSONArray jsonArray = new JSONArray(getSharedPreferences("sp", Context.MODE_PRIVATE).getString(SearchActivity.SP_SEARCH, "[]"));
+            jsonArray.put(edit.getText().toString());
+            getSharedPreferences("sp", Context.MODE_PRIVATE).edit().putString(SearchActivity.SP_SEARCH, jsonArray.toString()).commit();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        adapter.clear();
         Observable.just("").doOnSubscribe(new Action0() {
             @Override
             public void call() {
@@ -132,7 +172,7 @@ public class HotTypeActivity extends VBaseActivity implements ScrollBottomLoadLi
 
 
                         try {
-                            return new JSONObject(HttpUtils.doPost("category", "hotMovices", typeId));
+                            return new JSONObject(HttpUtils.doPost("movice", "search", edit.getText().toString()));
                         } catch (Exception e) {
                             VApplication.toast(getString(R.string.net_fail));
                         }
@@ -148,15 +188,23 @@ public class HotTypeActivity extends VBaseActivity implements ScrollBottomLoadLi
                             if (bean.getInt("code") != 0) {
                                 VApplication.toastJsonError(bean);
                             } else {
-                                page=2;
+
                                 JSONArray jsonArray = bean.getJSONArray("data");
-                                List<MovieForType> list = new ArrayList<MovieForType>();
+                                List<HMoiveItem> list = new ArrayList<HMoiveItem>();
                                 for (int i = 0; i < jsonArray.length(); i++) {
-                                    MovieForType movieForType = JSON.parseObject(jsonArray.getJSONObject(i)
-                                            .toString(), MovieForType.class);
-                                    list.add(movieForType);
+                                    HMoiveItem hMoiveItem = JSON.parseObject(jsonArray.getJSONObject(i)
+                                            .toString(), HMoiveItem.class);
+                                    list.add(hMoiveItem);
                                 }
-                                loadDataTolist(list);
+
+                                if (list.size() == 0) {
+                                    fail_tv.setVisibility(View.VISIBLE);
+                                } else {
+                                    page = 2;
+                                    fail_tv.setVisibility(View.GONE);
+                                    adapter.replaceAll(list);
+                                }
+
                             }
                         } catch (JSONException e) {
                             VApplication.toast(getString(R.string.net_fail));
@@ -170,13 +218,22 @@ public class HotTypeActivity extends VBaseActivity implements ScrollBottomLoadLi
                         VApplication.toast(getString(R.string.net_fail));
                     }
                 });
-
     }
 
-    private void loadDataTolist(List<MovieForType> list) throws JSONException {
-        movieForTypeAdapter.replaceAll(list);
+    public static void Launch(Activity activity, String key) {
+        Intent intent = new Intent(activity, SearchResultActivity.class);
+        intent.putExtra("key", key);
+        activity.startActivity(intent);
     }
 
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.back) {
+            super.onBackPressed();
+        } else if (view.getId() == R.id.search) {
+            search();
+        }
+    }
 
     @Override
     public void onItemViewClick(View view, int position) {
@@ -190,20 +247,11 @@ public class HotTypeActivity extends VBaseActivity implements ScrollBottomLoadLi
 
     @Override
     public void onStartRun(PulldownableListView view) {
-        loadDataFornet();
+        search();
     }
 
     @Override
     public void onBottomLoad(ScrollBottomLoadListView listView) {
-        loadMoreData();
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v instanceof LinearLayout && v.getTag() instanceof ClassificationItem.HotsBean) {
-            ClassificationItem.HotsBean type = (ClassificationItem.HotsBean) v.getTag();
-            //hot type click
-            OneTypeActivity.Launch(this, type.getId(), type.getName());
-        }
+        searchMore();
     }
 }

@@ -7,37 +7,46 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import org.gtq.vhubs.R;
 
 import java.util.ArrayList;
 
 import support.ui.frt.BaseFrtFactory;
+import support.utils.SystemUtils;
 
 /**
  * Created by guotengqian on 2016/6/1.
  */
 public class OneTypeActivity extends ViewpageActivity {
     String id;
+    View status_bar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-
         String name = intent.getStringExtra("type_name");
         id = intent.getStringExtra("type_id");
+        super.onCreate(savedInstanceState);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(name);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         select_iv0.getBackground().setAlpha(255);
         select_iv1.getBackground().setAlpha(0);
+
+        status_bar = findViewById(R.id.status_bar);
+        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) status_bar.getLayoutParams();
+        lp.height = SystemUtils.getStatusBarHeight(this);
+        status_bar.setLayoutParams(lp);
     }
 
     @Override
     protected void setmContentView() {
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_onetype);
     }
 
     @Override
