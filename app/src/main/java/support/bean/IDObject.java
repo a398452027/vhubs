@@ -6,7 +6,7 @@ public class IDObject implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	protected final String mId;
+	protected String mId;
 	
 	public IDObject(String id){
 		mId = id;

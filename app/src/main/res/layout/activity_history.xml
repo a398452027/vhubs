@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/favorites_head_h"
+        android:background="@drawable/side_nav_bar"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/test_shadow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="60sp"
+            android:textColor="@color/text_pink"
+            android:layout_gravity="center"
+            android:text="23"
+            android:shadowColor="#ffee00ff"
+            android:shadowRadius="25"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_bg">
+
+        <ListView
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ListView>
+
+
+        <TextView
+            android:id="@+id/fail_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/main_bg"
+            android:gravity="center"
+            android:text="@string/fail_search"
+            android:textColor="@color/text_blue"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/pb_ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@color/main_bg">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

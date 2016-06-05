@@ -17,6 +17,8 @@
         <ImageView
             android:id="@+id/back"
             android:layout_width="50dp"
+            android:src="@mipmap/back"
+            android:padding="8dp"
             android:layout_height="match_parent" />
 
         <EditText
@@ -59,6 +61,7 @@
             android:id="@+id/fail_tv"
             android:textColor="@color/text_blue"
             android:textSize="20sp"
+            android:background="@color/main_bg"
             android:text="@string/fail_search"
             android:gravity="center"
             android:layout_width="match_parent"

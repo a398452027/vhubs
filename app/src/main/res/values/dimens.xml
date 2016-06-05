@@ -11,4 +11,6 @@
     <dimen name="select_tab">48dp</dimen>
     <dimen name="home_vp_h">180dp</dimen>
     <dimen name="home_movie_h">150dp</dimen>
+
+    <dimen name="favorites_head_h">140dp</dimen>
 </resources>

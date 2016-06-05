@@ -126,7 +126,8 @@ public class SearchResultActivity extends VBaseActivity implements View.OnClickL
                                 VApplication.toastJsonError(bean);
                             } else {
                                 page++;
-                                JSONArray jsonArray = bean.getJSONArray("data");
+                                JSONArray jsonArray = bean.getJSONObject("data").getJSONArray("movices");
+                                lv.hasMoreLoad(bean.getJSONObject("data").getBoolean("hasMore"));
                                 List<HMoiveItem> list = new ArrayList<HMoiveItem>();
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     HMoiveItem hMoiveItem = JSON.parseObject(jsonArray.getJSONObject(i)
@@ -153,6 +154,12 @@ public class SearchResultActivity extends VBaseActivity implements View.OnClickL
     private void search() {
         try {
             JSONArray jsonArray = new JSONArray(getSharedPreferences("sp", Context.MODE_PRIVATE).getString(SearchActivity.SP_SEARCH, "[]"));
+
+            for(int i=0;i<jsonArray.length();i++){
+                if(jsonArray.getString(i).equals(edit.getText().toString())){
+                    jsonArray.remove(i);
+                }
+            }
             jsonArray.put(edit.getText().toString());
             getSharedPreferences("sp", Context.MODE_PRIVATE).edit().putString(SearchActivity.SP_SEARCH, jsonArray.toString()).commit();
         } catch (JSONException e) {
@@ -189,7 +196,8 @@ public class SearchResultActivity extends VBaseActivity implements View.OnClickL
                                 VApplication.toastJsonError(bean);
                             } else {
 
-                                JSONArray jsonArray = bean.getJSONArray("data");
+                                JSONArray jsonArray = bean.getJSONObject("data").getJSONArray("movices");
+                                lv.hasMoreLoad(bean.getJSONObject("data").getBoolean("hasMore"));
                                 List<HMoiveItem> list = new ArrayList<HMoiveItem>();
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     HMoiveItem hMoiveItem = JSON.parseObject(jsonArray.getJSONObject(i)

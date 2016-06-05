@@ -6,6 +6,7 @@
 
     <string name="action_search">Search</string>
     <string name="action_history">History</string>
+    <string name="action_clear">Clear</string>
 
     <string name="nav_home">Home</string>
     <string name="nav_favorites">Favorites</string>
@@ -37,4 +38,7 @@
     <string name="view_num">观看次数：%s</string>
     <string name="creat_time">创建时间：%s</string>
     <string name="fail_search">未找到相关影片</string>
+    <string name="clear">清空</string>
+    <string name="clear_favorites_msg">是否清空所有喜爱电影？</string>
+    <string name="clear_history_msg">是否清空所有播放记录？</string>
 </resources>

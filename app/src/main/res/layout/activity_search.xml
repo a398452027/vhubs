@@ -18,7 +18,9 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:src="@mipmap/back"
             android:id="@+id/back"
+            android:padding="8dp"
             android:layout_width="50dp"
             android:layout_height="match_parent" />
 

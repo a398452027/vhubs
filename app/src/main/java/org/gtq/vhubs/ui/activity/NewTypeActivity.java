@@ -87,7 +87,8 @@ public class NewTypeActivity extends VBaseActivity  implements ScrollBottomLoadL
                                 VApplication.toastJsonError(bean);
                             } else {
                                 page++;
-                                JSONArray jsonArray = bean.getJSONArray("data");
+                                JSONArray jsonArray = bean.getJSONObject("data").getJSONArray("movices");
+                                lv.hasMoreLoad(bean.getJSONObject("data").getBoolean("hasMore"));
                                 List<MovieForType> list = new ArrayList<MovieForType>();
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     MovieForType movieForType = JSON.parseObject(jsonArray.getJSONObject(i)
@@ -140,7 +141,8 @@ public class NewTypeActivity extends VBaseActivity  implements ScrollBottomLoadL
                                 VApplication.toastJsonError(bean);
                             } else {
                                 page=2;
-                                JSONArray jsonArray = bean.getJSONArray("data");
+                                JSONArray jsonArray = bean.getJSONObject("data").getJSONArray("movices");
+                                lv.hasMoreLoad(bean.getJSONObject("data").getBoolean("hasMore"));
                                 List<MovieForType> list = new ArrayList<MovieForType>();
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     MovieForType movieForType = JSON.parseObject(jsonArray.getJSONObject(i)

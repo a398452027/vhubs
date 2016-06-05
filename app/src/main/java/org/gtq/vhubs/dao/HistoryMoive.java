@@ -5,23 +5,7 @@ import support.bean.IDObject;
 /**
  * Created by guo on 2016/6/5.
  */
-public class HMoiveItem extends IDObject {
-
-    /**
-     * id : 7
-     * name : 田馥甄 - 『康熙來了』深情演唱蔡依林的『舞娘』
-     * desc : 田馥甄 - 『康熙來了』深情演唱蔡依林的『舞娘』
-     * play_time : 0
-     * show_play_time : 552
-     * duration : 120
-     * cover_img : http://115.28.54.54:81/747/133/328/fc852a42-848e-4c8d-898b-e95599e5648b.jpg
-     * category_id : 8
-     * language : 中文
-     * grade : 9
-     * create_time : 1464872541
-     * vedio_url : http://player.youku.com/player.php/sid/XMzg5NzExNTM2/v.swf
-     * update_time : 1464872541
-     */
+public class HistoryMoive  extends IDObject{
 
     private String id;
     private String name;
@@ -36,18 +20,33 @@ public class HMoiveItem extends IDObject {
     private String create_time;
     private String vedio_url;
     private String update_time;
+    private long watch_time;
 
-    public HMoiveItem() {
+    public HistoryMoive(HMoiveItem hMoiveItem,long watch_time) {
         super("");
+        this.watch_time=watch_time;
+        setId(hMoiveItem.getId());
+        setName(hMoiveItem.getName());
+        setDesc(hMoiveItem.getDesc());
+        setPlay_time(hMoiveItem.getPlay_time());
+        setShow_play_time(hMoiveItem.getShow_play_time());
+        setDuration(hMoiveItem.getDuration());
+        setCover_img(hMoiveItem.getCover_img());
+        setCategory_id(hMoiveItem.getCategory_id());
+        setLanguage(hMoiveItem.getLanguage());
+        setGrade(hMoiveItem.getGrade());
+        setCreate_time(hMoiveItem.getCreate_time());
+        setVedio_url(hMoiveItem.getVedio_url());
+        setUpdate_time(hMoiveItem.getUpdate_time());
     }
-
 
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
-        mId = id;
+
+        mId=id;
         this.id = id;
     }
 

@@ -12,7 +12,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@drawable/side_nav_bar"
         app:navigationIcon="@mipmap/user"
-        app:title=" " />
+        app:titleTextColor="@color/text_pink"/>
 
 
     <RelativeLayout

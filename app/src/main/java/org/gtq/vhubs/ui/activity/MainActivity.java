@@ -1,14 +1,17 @@
 package org.gtq.vhubs.ui.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.TextViewCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,15 +38,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import support.ui.activity.VBaseActivity;
 import support.ui.frt.BaseFrtFactory;
 import support.utils.SystemUtils;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class MainActivity extends VBaseActivity implements AdapterView.OnItemClickListener {
 
     View status_bar;
     private ListView mLvLeftMenu;
     DrawerLayout drawer;
     List<Fragment> fragments;
+    Toolbar toolbar;
+
+    int select = 0;
+
+    String[] tags = new String[]{"home"
+            , "favorites", "history", "setting"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +71,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 //
 //        }
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle(R.string.nav_home);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -89,20 +100,24 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         fragments = new ArrayList<>();
         Fragment home = BaseFrtFactory.createForActivityView(
                 HomeActivity.class.getName(), "main");
-//        Fragment agreement = BaseFrtFactory.createForActivityView(
-//                AgreementActivity_.class.getName(), "main");
-//        Fragment burse = BaseFrtFactory.createForActivityView(
-//                BurseActivity_.class.getName(), "main");
-//        Fragment record = BaseFrtFactory.createForActivityView(
-//                RecordActivity_.class.getName(), "main");
+        Fragment favorites = BaseFrtFactory.createForActivityView(
+                FavoritesActivity.class.getName(), "main");
+        Fragment history = BaseFrtFactory.createForActivityView(
+                HistoryActivity.class.getName(), "main");
+        Fragment setting = BaseFrtFactory.createForActivityView(
+                SettingActivity.class.getName(), "main");
 //        Fragment setting = BaseFrtFactory.createForActivityView(
 //                SettingActivity_.class.getName(), "main");
 //        Fragment chat = BaseFrtFactory.createForActivityView(
 //                ChatActivity_.class.getName(), "main");
         fragments.add(home);
+        fragments.add(favorites);
+        fragments.add(history);
+        fragments.add(setting);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_main, fragments.get(0)).commit();
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager.beginTransaction().replace(R.id.content_main, fragments.get(0)).commit();
+        stateCheck(savedInstanceState);
     }
 
     @Override
@@ -119,6 +134,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        menu.findItem(R.id.action_find).setVisible(true);
+        menu.findItem(R.id.action_history).setVisible(true);
+        menu.findItem(R.id.action_clear).setVisible(false);
         return true;
     }
 
@@ -133,9 +151,72 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if (id == R.id.action_find) {
             SearchActivity.Launch(this);
             return true;
+        } else if (id == R.id.action_history) {
+
+        } else if (id == R.id.action_clear) {
+            if (select == 1) {
+                //删除喜爱
+                //删除历史
+                createYesNoDialog(this, getString(android.R.string.yes), getString(android.R.string.cancel),
+                        getString(R.string.clear_favorites_msg), 0, getString(R.string.clear), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if(i==-1){
+
+                                }
+                            }
+                        }).show();
+            } else if (select == 2) {
+                //删除历史
+                createYesNoDialog(this, getString(android.R.string.yes), getString(android.R.string.cancel),
+                        getString(R.string.clear_history_msg), 0, getString(R.string.clear), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if(i==-1){
+
+                                }
+
+                            }
+                        }).show();
+            }
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * 状态检测 用于内存不足的时候保证fragment不会重叠
+     *
+     * @param savedInstanceState
+     */
+    private void stateCheck(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+
+            FragmentTransaction fts = getSupportFragmentManager().beginTransaction();
+            fts.add(R.id.content_main, fragments.get(0), tags[0]);
+            fts.commit();
+
+//            fts.add(R.id.content_main, fragments.get(1),tags[1]);
+//            fts.add(R.id.content_main, fragments.get(2),tags[2]);
+//            fts.add(R.id.content_main, fragments.get(3),tags[3]);
+//            fts.add(R.id.content_main, fragments.get(4),tags[4]);
+//            fts.add(R.id.content_main, fragments.get(5),tags[5]);
+//            getSupportFragmentManager().beginTransaction().show(fragments.get(0)).hide
+//                    (fragments.get(1)).hide(fragments.get(2)).hide(fragments.get(3)).hide(fragments.get(4)).hide
+//                    (fragments.get(5)).commit();
+
+        } else {
+            Fragment af = (Fragment) getSupportFragmentManager()
+                    .findFragmentByTag(tags[0]);
+            Fragment pf = (Fragment) getSupportFragmentManager()
+                    .findFragmentByTag(tags[1]);
+            Fragment rf = (Fragment) getSupportFragmentManager()
+                    .findFragmentByTag(tags[2]);
+            Fragment inf = (Fragment) getSupportFragmentManager()
+                    .findFragmentByTag(tags[3]);
+            getSupportFragmentManager().beginTransaction().show(af).hide(pf).hide(rf)
+                    .hide(inf).commit();
+        }
     }
 
     @Override
@@ -149,6 +230,61 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if (i - 1 >= 0) {
             view.setBackgroundColor(getResources().getColor(R.color.nav_item_p));
             drawer.closeDrawer(GravityCompat.START);
+            select = i - 1;
+
+        }
+
+        switch (i) {
+            case 1:
+                getSupportFragmentManager().beginTransaction().show(fragments.get(0)).hide
+                        (fragments.get(1)).hide(fragments.get(2)).hide(fragments.get(3)).commit();
+                toolbar.setTitle(R.string.nav_home);
+                toolbar.getMenu().findItem(R.id.action_find).setVisible(true);
+                toolbar.getMenu().findItem(R.id.action_history).setVisible(true);
+                toolbar.getMenu().findItem(R.id.action_clear).setVisible(false);
+                break;
+            case 2:
+                if (getSupportFragmentManager().findFragmentByTag(tags[1]) != null) {
+                    getSupportFragmentManager().beginTransaction().show(fragments.get(1)).hide
+                            (fragments.get(0)).hide(fragments.get(2)).hide(fragments.get(3)).commit();
+                } else {
+                    getSupportFragmentManager().beginTransaction().add(R.id.content_main, fragments.get(1), tags[1]).show(fragments.get(1)).hide
+                            (fragments.get(0)).hide(fragments.get(2)).hide(fragments.get(3)).commit();
+                }
+                toolbar.setTitle(R.string.nav_favorites);
+                toolbar.getMenu().findItem(R.id.action_find).setVisible(false);
+                toolbar.getMenu().findItem(R.id.action_history).setVisible(false);
+                toolbar.getMenu().findItem(R.id.action_clear).setVisible(true);
+                break;
+            case 3:
+                if (getSupportFragmentManager().findFragmentByTag(tags[2]) != null) {
+                    getSupportFragmentManager().beginTransaction().show(fragments.get(2)).hide
+                            (fragments.get(0)).hide(fragments.get(1)).hide(fragments.get(3)).commit();
+                } else {
+                    getSupportFragmentManager().beginTransaction().add(R.id.content_main, fragments.get(2), tags[2]).show
+                            (fragments.get(2)).hide
+                            (fragments.get(0)).hide(fragments.get(1)).hide(fragments.get(3)).commit();
+                }
+                toolbar.setTitle(R.string.nav_history);
+                toolbar.getMenu().findItem(R.id.action_find).setVisible(false);
+                toolbar.getMenu().findItem(R.id.action_history).setVisible(false);
+                toolbar.getMenu().findItem(R.id.action_clear).setVisible(true);
+                break;
+            case 4:
+                if (getSupportFragmentManager().findFragmentByTag(tags[3]) != null) {
+                    getSupportFragmentManager().beginTransaction().show(fragments.get(3)).hide
+                            (fragments.get(0)).hide(fragments.get(1)).hide(fragments.get(2)).commit();
+                } else {
+                    getSupportFragmentManager().beginTransaction().add(R.id.content_main, fragments.get(3), tags[3]).show
+                            (fragments.get(3)).hide
+                            (fragments.get(0)).hide(fragments.get(1)).hide(fragments.get(2)).commit();
+                }
+                toolbar.setTitle(R.string.nav_settings);
+                toolbar.getMenu().findItem(R.id.action_find).setVisible(false);
+                toolbar.getMenu().findItem(R.id.action_history).setVisible(false);
+                toolbar.getMenu().findItem(R.id.action_clear).setVisible(false);
+                break;
+
         }
 
     }
