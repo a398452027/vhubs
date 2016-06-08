@@ -92,6 +92,18 @@ public class XDB {
         }
     }
 
+    public void deleteAll(Class item, boolean bPrivate) {
+        DatabaseManager dm = getDatabaseManager(bPrivate);
+        SQLiteDatabase db = dm.lockWritableDatabase();
+        final String tableName = ClassUtils.getTableName(item);
+        try {
+            db.delete(tableName, null, null);
+        } catch (Exception e) {
+
+        } finally {
+            dm.unlockWritableDatabase(db);
+        }
+    }
     public void deleteAll(Object item, boolean bPrivate) {
         DatabaseManager dm = getDatabaseManager(bPrivate);
         SQLiteDatabase db = dm.lockWritableDatabase();

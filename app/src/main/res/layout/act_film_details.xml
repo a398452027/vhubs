@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="#e3e3e3">
+
+    <RelativeLayout
+        android:id="@+id/rtlVideo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/nor_black">
+
+        <com.videodemo.VideoView
+            android:id="@+id/videoView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/vdv_height"
+            android:layout_centerInParent="true"
+            android:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/btnPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@null"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitCenter"
+            android:src="@drawable/selector_btn_par_play_flag"
+            android:visibility="invisible" />
+
+        <FrameLayout
+            android:id="@+id/fltController"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone" />
+
+        <FrameLayout
+            android:id="@+id/titleController"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:visibility="gone" />
+
+        <FrameLayout
+            android:id="@+id/rechangeController"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleController"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/lltLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/tvNetSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!--<include-->
+    <!--android:id="@+id/ileFilmPager"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="fill_parent"-->
+    <!--android:layout_below="@id/rtlVideo"-->
+    <!--layout="@layout/box_film_pager"-->
+    <!--android:visibility="invisible" />-->
+
+
+    <LinearLayout
+        android:layout_below="@+id/rtlVideo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_bg"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/select_tab"
+            android:background="@drawable/side_nav_bar"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <RelativeLayout
+                android:id="@+id/tab_0"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/select_iv0"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/select_bar_bg" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/hot_type"
+                    android:textColor="@color/text_pink" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/tab_1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/select_iv1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/select_bar_bg"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/new_type"
+                    android:textColor="@color/text_pink" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vprRelateFilm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v4.view.ViewPager>
+
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

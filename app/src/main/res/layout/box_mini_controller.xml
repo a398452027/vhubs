@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rtlController"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/film_player_h"
+    android:layout_alignParentBottom="true"
+    android:alpha="0.7"
+    android:background="@color/nor_control_bg" >
+
+    <ImageButton
+        android:id="@+id/btnPlayOrPausePortrait"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/film_player_padding_left"
+        android:background="@null"
+        android:clickable="false"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitCenter"
+        android:src="@drawable/selector_btn_par_play" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/btnFullScreen"
+        android:layout_toRightOf="@id/btnPlayOrPausePortrait"
+        android:orientation="horizontal" >
+
+        <SeekBar
+            android:id="@+id/videoplay_seekbar_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="100"
+            android:maxHeight="3dip"
+            android:minHeight="3dip"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:progress="0"
+            android:progressDrawable="@drawable/style_seekbar_time"
+            android:secondaryProgress="0"
+            android:thumb="@mipmap/videobar_point_icon_normal"
+            android:thumbOffset="6dip" />
+
+        <LinearLayout
+            android:id="@+id/lltTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tvPlayTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="00:00"
+                android:textColor="@color/nor_mini_play_time"
+                android:textSize="@dimen/sp_film_player_time" />
+
+            <TextView
+                android:id="@+id/tvSplit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="/"
+                android:textColor="@color/nor_mini_play_time"
+                android:textSize="@dimen/sp_film_player_time" />
+
+            <TextView
+                android:id="@+id/tvAllTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="00:00"
+                android:textColor="@color/nor_mini_play_time"
+                android:textSize="@dimen/sp_film_player_time" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btnFullScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/film_player_padding_right"
+        android:background="@null"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/selector_btn_fullscreen" />
+
+</RelativeLayout>

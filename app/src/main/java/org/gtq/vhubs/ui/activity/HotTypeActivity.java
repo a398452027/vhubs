@@ -158,7 +158,7 @@ public class HotTypeActivity extends VBaseActivity implements ScrollBottomLoadLi
                                             .toString(), MovieForType.class);
                                     list.add(movieForType);
                                 }
-                                loadDataTolist(list);
+                                movieForTypeAdapter.replaceAll(list);
                             }
                         } catch (JSONException e) {
                             VApplication.toast(getString(R.string.net_fail));
@@ -175,9 +175,7 @@ public class HotTypeActivity extends VBaseActivity implements ScrollBottomLoadLi
 
     }
 
-    private void loadDataTolist(List<MovieForType> list) throws JSONException {
-        movieForTypeAdapter.replaceAll(list);
-    }
+
 
 
     @Override

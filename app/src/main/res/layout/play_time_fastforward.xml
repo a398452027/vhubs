@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/play_time_fastforward"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/layeract_bg"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <!-- android:background="#b0000000" -->
+
+    <LinearLayout
+        android:layout_width="@dimen/play_fast_w"
+        android:layout_height="@dimen/play_fast_h"
+        android:layout_gravity="center"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/playfast_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/play_fast_margin_top"
+            android:src="@mipmap/video_forward_icon_pressed" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/play_fast_margin_top"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/playtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00:00"
+                android:textColor="@color/nor_play_time"
+                android:textSize="@dimen/sp_play_fast_time" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" / "
+                android:textColor="@color/nor_white"
+                android:textSize="@dimen/sp_play_fast_time" />
+
+            <TextView
+                android:id="@+id/video_totaltime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00:00"
+                android:textColor="@color/nor_white"
+                android:textSize="@dimen/sp_play_fast_time" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

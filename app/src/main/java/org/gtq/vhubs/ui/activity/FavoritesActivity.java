@@ -11,6 +11,7 @@ import com.alibaba.fastjson.JSON;
 
 import org.gtq.vhubs.R;
 import org.gtq.vhubs.core.VApplication;
+import org.gtq.vhubs.dao.FavoritesMoive;
 import org.gtq.vhubs.dao.HMoiveItem;
 import org.gtq.vhubs.ui.adapter.HMoiveAdapter;
 import org.gtq.vhubs.utils.HttpUtils;
@@ -19,6 +20,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import rx.Observable;
@@ -52,41 +56,63 @@ public class FavoritesActivity extends VBaseActivity implements View.OnClickList
         pb_ll = (LinearLayout) findViewById(R.id.pb_ll);
         fail_tv = (TextView) findViewById(R.id.fail_tv);
         lv = (ListView) findViewById(R.id.lv);
-        adapter = new HMoiveAdapter(this, this);
+        adapter = new HMoiveAdapter<FavoritesMoive>(this, this);
         lv.setAdapter(adapter);
+
+    }
+
+    @Override
+    public void Resume() {
+        super.Resume();
         loadForDb();
     }
 
-    private  void loadForDb(){
+    private void sort(List<FavoritesMoive> list) {
+        Collections.sort(list, new Comparator<FavoritesMoive>() {
+            @Override
+            public int compare(FavoritesMoive lhs, FavoritesMoive rhs) {
+                if (lhs.getSave_time() > rhs.getSave_time()) {
+                    return -1;
+                } else if (lhs.getSave_time() < rhs.getSave_time()) {
+                    return 1;
+                }
+                return 0;
+            }
+        });
+    }
+
+    private void loadForDb() {
         Observable.just("").doOnSubscribe(new Action0() {
             @Override
             public void call() {
 
             }
         }).observeOn(Schedulers.io())
-                .map(new Func1<String, List<HMoiveItem>>() {
+                .map(new Func1<String, List<FavoritesMoive>>() {
                     @Override
-                    public  List<HMoiveItem> call(String s) {
+                    public List<FavoritesMoive> call(String s) {
 
 
                         try {
 
-                            return XDB.getInstance().readAll(HMoiveItem.class,false);
+                            return XDB.getInstance().readAll(FavoritesMoive.class, false);
                         } catch (Exception e) {
                             VApplication.toast(getString(R.string.net_fail));
                         }
                         return null;
                     }
                 }).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1< List<HMoiveItem>>() {
+                .subscribe(new Action1<List<FavoritesMoive>>() {
                     @Override
-                    public void call( List<HMoiveItem> list) {
+                    public void call(List<FavoritesMoive> list) {
                         pb_ll.setVisibility(View.GONE);
-                        if(list==null||list.size()==0){
+                        if (list == null || list.size() == 0) {
                             fail_tv.setVisibility(View.VISIBLE);
-                        }else{
+                        } else {
+                            sort(list);
                             fail_tv.setVisibility(View.GONE);
                             lv.setVisibility(View.VISIBLE);
+
                             adapter.replaceAll(list);
                         }
                     }

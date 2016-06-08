@@ -16,43 +16,6 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class AesUtil {
 
-    public static String encryptByAes(String strMessage, String keys) {
-        try {
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-            IvParameterSpec zeroIv = new IvParameterSpec(new byte[cipher.getBlockSize()]);
-            SecretKeySpec key = new SecretKeySpec(keys.getBytes(), "AES");
-
-            cipher.init(Cipher.ENCRYPT_MODE, key, zeroIv);
-            byte[] byteMi = cipher.doFinal(strMessage.getBytes("UTF8"));
-
-            String strMi = Base64.encodeToString(byteMi, Base64.DEFAULT);
-
-            return strMi;
-        } catch (Exception e) {
-
-        }
-        return null;
-    }
-
-    public static String decryptByAes(String keys, String strMi) {
-        try {
-            byte[] byteMi = Base64.decode(strMi, Base64.DEFAULT);
-
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-            IvParameterSpec zeroIv = new IvParameterSpec(new byte[cipher.getBlockSize()]);
-            SecretKeySpec key = new SecretKeySpec(keys.getBytes(), "AES");
-
-            cipher.init(Cipher.DECRYPT_MODE, key, zeroIv);
-            byte[] byteMing = cipher.doFinal(byteMi);
-
-            String strMing = new String(byteMing, "UTF8");
-            return strMing;
-        } catch (final Exception e) {
-
-        }
-        return null;
-    }
-
     /**
      * AES加密字符串
      *

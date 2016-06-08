@@ -18,7 +18,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.SoftReference;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
+import support.db.DatabaseManager;
+import support.db.IMModule;
+import support.db.PublicDatabaseManager;
 import support.ui.image.GImageLoader;
 
 /**
@@ -30,6 +35,8 @@ public class VApplication extends Application {
 
     private static SparseArray<SoftReference<Bitmap>> mapResIdToBitmap = new SparseArray<SoftReference<Bitmap>>();
 
+    protected Class<? extends DatabaseManager> mPublicDatabaseManagerClass;
+
     protected static int bmpMaxWidth;
     protected static int bmpMaxHeight;
     private static int sScreenWidth;
@@ -38,6 +45,19 @@ public class VApplication extends Application {
 
     public static VApplication getInstance() {
         return mInstance;
+    }
+
+    private void initDB() {
+        mPublicDatabaseManagerClass = PublicDatabaseManager.class;
+        try {
+            IMModule dm = null;
+            Constructor<? extends DatabaseManager> c = mPublicDatabaseManagerClass.getDeclaredConstructor((Class[]) null);
+            c.setAccessible(true);
+            dm = (DatabaseManager) c.newInstance();
+            dm.initial(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -50,9 +70,11 @@ public class VApplication extends Application {
         sScreenWidth = dm.widthPixels;
         sScreenHeight = dm.heightPixels;
         sScreenDpi = dm.densityDpi;
-
         bmpMaxWidth = getScreenWidth();
         bmpMaxHeight = bmpMaxWidth;
+        CrashHandler.getInstance().init(this);
+        //非捕捉异常
+        initDB();
     }
 
     public static void setBitmapEx(String url, GImageLoader.ImageLoadingListener loadingListener) {
@@ -71,8 +93,8 @@ public class VApplication extends Application {
         return sScreenDpi;
     }
 
-    public static void setBitmapEx(final View view, String url){
-        setBitmapEx(view,url,R.mipmap.loading);
+    public static void setBitmapEx(final View view, String url) {
+        setBitmapEx(view, url, R.mipmap.loading);
     }
 
     /**
@@ -139,10 +161,11 @@ public class VApplication extends Application {
         return bmp;
     }
 
-    public static void toast(String text){
-        Toast.makeText(getInstance(),text,Toast.LENGTH_SHORT).show();
+    public static void toast(String text) {
+        Toast.makeText(getInstance(), text, Toast.LENGTH_SHORT).show();
     }
-    public static void toastJsonError(JSONObject jo){
+
+    public static void toastJsonError(JSONObject jo) {
         try {
             toast(jo.getString("errMsg"));
         } catch (JSONException e) {

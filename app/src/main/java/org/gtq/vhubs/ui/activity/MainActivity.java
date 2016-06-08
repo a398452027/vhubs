@@ -33,11 +33,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import org.gtq.vhubs.R;
+import org.gtq.vhubs.dao.FavoritesMoive;
+import org.gtq.vhubs.dao.HistoryMoive;
+import org.gtq.vhubs.utils.Function_Utility;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import support.db.XDB;
 import support.ui.activity.VBaseActivity;
 import support.ui.frt.BaseFrtFactory;
 import support.utils.SystemUtils;
@@ -58,18 +62,7 @@ public class MainActivity extends VBaseActivity implements AdapterView.OnItemCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            Window window = getWindow();
-//            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
-//                    | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-//            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-//                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-//                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-//            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-//            window.setStatusBarColor(getResources().getColor(android.R.color.transparent));
-//
-//        }
+
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -118,7 +111,9 @@ public class MainActivity extends VBaseActivity implements AdapterView.OnItemCli
 //        FragmentManager fragmentManager = getSupportFragmentManager();
 //        fragmentManager.beginTransaction().replace(R.id.content_main, fragments.get(0)).commit();
         stateCheck(savedInstanceState);
+        Function_Utility.checkUpdate(this);
     }
+
 
     @Override
     public void onBackPressed() {
@@ -135,7 +130,7 @@ public class MainActivity extends VBaseActivity implements AdapterView.OnItemCli
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         menu.findItem(R.id.action_find).setVisible(true);
-        menu.findItem(R.id.action_history).setVisible(true);
+        menu.findItem(R.id.action_share).setVisible(true);
         menu.findItem(R.id.action_clear).setVisible(false);
         return true;
     }
@@ -151,18 +146,22 @@ public class MainActivity extends VBaseActivity implements AdapterView.OnItemCli
         if (id == R.id.action_find) {
             SearchActivity.Launch(this);
             return true;
-        } else if (id == R.id.action_history) {
-
+        } else if (id == R.id.action_share) {
+            SystemUtils.shareMsg(this,"ddd0", "ddd1", "ddd2", null);
         } else if (id == R.id.action_clear) {
             if (select == 1) {
                 //删除喜爱
-                //删除历史
                 createYesNoDialog(this, getString(android.R.string.yes), getString(android.R.string.cancel),
                         getString(R.string.clear_favorites_msg), 0, getString(R.string.clear), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 if(i==-1){
+                                    XDB.getInstance().deleteAll(FavoritesMoive.class,false);
+                                    getSupportFragmentManager().beginTransaction().show(fragments.get(0)).hide
+                                            (fragments.get(1)).hide(fragments.get(2)).hide(fragments.get(3)).commit();
 
+                                    getSupportFragmentManager().beginTransaction().show(fragments.get(1)).hide
+                                            (fragments.get(0)).hide(fragments.get(2)).hide(fragments.get(3)).commit();
                                 }
                             }
                         }).show();
@@ -173,7 +172,12 @@ public class MainActivity extends VBaseActivity implements AdapterView.OnItemCli
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 if(i==-1){
+                                    XDB.getInstance().deleteAll(HistoryMoive.class,false);
+                                    getSupportFragmentManager().beginTransaction().show(fragments.get(0)).hide
+                                            (fragments.get(1)).hide(fragments.get(2)).hide(fragments.get(3)).commit();
 
+                                    getSupportFragmentManager().beginTransaction().show(fragments.get(2)).hide
+                                            (fragments.get(0)).hide(fragments.get(1)).hide(fragments.get(3)).commit();
                                 }
 
                             }
@@ -240,7 +244,7 @@ public class MainActivity extends VBaseActivity implements AdapterView.OnItemCli
                         (fragments.get(1)).hide(fragments.get(2)).hide(fragments.get(3)).commit();
                 toolbar.setTitle(R.string.nav_home);
                 toolbar.getMenu().findItem(R.id.action_find).setVisible(true);
-                toolbar.getMenu().findItem(R.id.action_history).setVisible(true);
+                toolbar.getMenu().findItem(R.id.action_share).setVisible(true);
                 toolbar.getMenu().findItem(R.id.action_clear).setVisible(false);
                 break;
             case 2:
@@ -253,7 +257,7 @@ public class MainActivity extends VBaseActivity implements AdapterView.OnItemCli
                 }
                 toolbar.setTitle(R.string.nav_favorites);
                 toolbar.getMenu().findItem(R.id.action_find).setVisible(false);
-                toolbar.getMenu().findItem(R.id.action_history).setVisible(false);
+                toolbar.getMenu().findItem(R.id.action_share).setVisible(false);
                 toolbar.getMenu().findItem(R.id.action_clear).setVisible(true);
                 break;
             case 3:
@@ -267,7 +271,7 @@ public class MainActivity extends VBaseActivity implements AdapterView.OnItemCli
                 }
                 toolbar.setTitle(R.string.nav_history);
                 toolbar.getMenu().findItem(R.id.action_find).setVisible(false);
-                toolbar.getMenu().findItem(R.id.action_history).setVisible(false);
+                toolbar.getMenu().findItem(R.id.action_share).setVisible(false);
                 toolbar.getMenu().findItem(R.id.action_clear).setVisible(true);
                 break;
             case 4:
@@ -281,7 +285,7 @@ public class MainActivity extends VBaseActivity implements AdapterView.OnItemCli
                 }
                 toolbar.setTitle(R.string.nav_settings);
                 toolbar.getMenu().findItem(R.id.action_find).setVisible(false);
-                toolbar.getMenu().findItem(R.id.action_history).setVisible(false);
+                toolbar.getMenu().findItem(R.id.action_share).setVisible(false);
                 toolbar.getMenu().findItem(R.id.action_clear).setVisible(false);
                 break;
 
@@ -389,22 +393,6 @@ public class MainActivity extends VBaseActivity implements AdapterView.OnItemCli
                     ImageView iv = (ImageView) convertView.findViewById(R.id.nav_iv);
                     iv.setImageResource(item.icon);
                     break;
-//                case LvMenuItem.TYPE_NO_ICON:
-//                    if (convertView == null)
-//                    {
-//                        convertView = mInflater.inflate(R.layout.design_drawer_item_subheader,
-//                                parent, false);
-//                    }
-//                    TextView subHeader = (TextView) convertView;
-//                    subHeader.setText(item.name);
-//                    break;
-//                case LvMenuItem.TYPE_SEPARATOR:
-//                    if (convertView == null)
-//                    {
-//                        convertView = mInflater.inflate(R.layout.design_drawer_item_separator,
-//                                parent, false);
-//                    }
-//                    break;
             }
 
             return convertView;

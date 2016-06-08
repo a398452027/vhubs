@@ -5,7 +5,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_search">Search</string>
-    <string name="action_history">History</string>
+    <string name="action_share">share</string>
     <string name="action_clear">Clear</string>
 
     <string name="nav_home">Home</string>
@@ -18,6 +18,10 @@
 
     <string name="hot_type">Hot</string>
     <string name="new_type">New</string>
+
+    <string name="moive_detail_trailer_type">Trailer</string>
+    <string name="moive_detail_more_type">More</string>
+
     <string name="bottom_load_loading">正在加载</string>
     <string name="bottom_load_loadmore">加载更多</string>
     <string name="bottom_load_nomore">后面没有了</string>
@@ -26,7 +30,7 @@
     <string name="pull_refresh_refreshing">刷新中</string>
     <string name="pull_refresh_last_update">最后刷新</string>
     <string name="pull_refresh">开始刷新</string>
-    <string name="pull_refresh_release_refresh">刷新失败</string>
+    <string name="pull_refresh_release_refresh">放开刷新</string>
 
     <string name="more">更多</string>
 
@@ -41,4 +45,8 @@
     <string name="clear">清空</string>
     <string name="clear_favorites_msg">是否清空所有喜爱电影？</string>
     <string name="clear_history_msg">是否清空所有播放记录？</string>
+    <string name="uncaught_exception_handler">程序崩溃了，正在重启</string>
+    <string name="updata">更新</string>
+    <string name="updata_msg">发现新的版本：%s ，是否更新？</string>
+    <string name="current_download">正在下载。。</string>
 </resources>

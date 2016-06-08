@@ -18,6 +18,7 @@ import com.alibaba.fastjson.JSON;
 
 import org.gtq.vhubs.R;
 import org.gtq.vhubs.core.VApplication;
+import org.gtq.vhubs.dao.FavoritesMoive;
 import org.gtq.vhubs.dao.HMoiveItem;
 import org.gtq.vhubs.dao.HotKey;
 import org.gtq.vhubs.ui.adapter.HMoiveAdapter;
@@ -88,7 +89,7 @@ public class SearchResultActivity extends VBaseActivity implements View.OnClickL
         search.setOnClickListener(this);
         lv = (ScrollBottomLoadListView) findViewById(R.id.lv);
         lv.startRun();
-        adapter = new HMoiveAdapter(this, this);
+        adapter = new HMoiveAdapter<HMoiveItem>(this, this);
         lv.setAdapter(adapter);
         lv.setOnScrollBottomListener(this);
         lv.setOnPullDownListener(this);
@@ -152,19 +153,17 @@ public class SearchResultActivity extends VBaseActivity implements View.OnClickL
     }
 
     private void search() {
-        try {
-            JSONArray jsonArray = new JSONArray(getSharedPreferences("sp", Context.MODE_PRIVATE).getString(SearchActivity.SP_SEARCH, "[]"));
 
-            for(int i=0;i<jsonArray.length();i++){
+            com.alibaba.fastjson.JSONArray jsonArray =com.alibaba.fastjson.JSONArray.parseArray(getSharedPreferences("sp", Context.MODE_PRIVATE).getString(SearchActivity.SP_SEARCH, "[]"));
+
+            for(int i=0;i<jsonArray.size();i++){
                 if(jsonArray.getString(i).equals(edit.getText().toString())){
                     jsonArray.remove(i);
                 }
             }
-            jsonArray.put(edit.getText().toString());
+            jsonArray.add(edit.getText().toString());
             getSharedPreferences("sp", Context.MODE_PRIVATE).edit().putString(SearchActivity.SP_SEARCH, jsonArray.toString()).commit();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
 
         adapter.clear();
         Observable.just("").doOnSubscribe(new Action0() {

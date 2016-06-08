@@ -1,0 +1,45 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/player_title_h"
+    android:alpha="0.7"
+    android:background="@color/nor_control_bg" >
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/navi_func_margin_r"
+        android:background="@drawable/selector_btn_back" />
+
+    <ImageButton
+        android:id="@+id/btnCollect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/navi_share_margin_r"
+        android:background="@drawable/selector_btn_favourite" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/btnCollect"
+        android:layout_toRightOf="@id/btnBack" >
+
+        <TextView
+            android:id="@+id/tvwNaviTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:ellipsize="end"
+            android:gravity="left|center_vertical"
+            android:singleLine="true"
+            android:textColor="@color/nor_mini_play_time"
+            android:textSize="@dimen/sp_film_detail_navi" />
+    </RelativeLayout>
+
+</RelativeLayout>

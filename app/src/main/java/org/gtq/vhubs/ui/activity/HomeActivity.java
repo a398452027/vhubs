@@ -8,9 +8,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import org.gtq.vhubs.R;
+import org.gtq.vhubs.dao.FavoritesMoive;
+import org.gtq.vhubs.dao.HistoryMoive;
 import org.gtq.vhubs.ui.adapter.XFragmentAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import support.ui.activity.VBaseActivity;
 import support.ui.frt.BaseFrtFactory;

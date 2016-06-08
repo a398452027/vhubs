@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import org.gtq.vhubs.R;
 import org.gtq.vhubs.core.VApplication;
+import org.gtq.vhubs.dao.HMoiveItem;
 import org.gtq.vhubs.dao.HomeListItem;
 
 import java.text.SimpleDateFormat;
@@ -80,12 +81,12 @@ public class HomeListAdapter extends SetBaseAdapter<HomeListItem> implements Vie
             holder = (ViewHolder) convertView.getTag();
         }
         HomeListItem homeListItem = (HomeListItem) getItem(position);
-        if (!TextUtils.isEmpty(homeListItem.getLogo())) {
-            VApplication.setBitmapEx(holder.title_iv, homeListItem.getLogo());
+        if (!TextUtils.isEmpty(homeListItem.getClogo())) {
+            VApplication.setBitmapEx(holder.title_iv, homeListItem.getClogo());
         } else {
             holder.title_iv.setImageResource(R.mipmap.hot);
         }
-        holder.title_name.setText(homeListItem.getName());
+        holder.title_name.setText(homeListItem.getCname());
         holder.more.setTag(homeListItem);
         holder.more.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +95,7 @@ public class HomeListAdapter extends SetBaseAdapter<HomeListItem> implements Vie
             }
         });
         for (int i = 0; i < homeListItem.getMovices().size(); i++) {
-            HomeListItem.MovicesBean movicesBean = homeListItem.getMovices().get(i);
+            HMoiveItem movicesBean = homeListItem.getMovices().get(i);
             switch (i) {
                 case 0:
                     setMoveData(holder.movie_01, holder.movie_iv01, holder.name_01, holder.good_01, holder.time_01,
@@ -132,10 +133,15 @@ public class HomeListAdapter extends SetBaseAdapter<HomeListItem> implements Vie
             ImageView movie_iv,
             TextView name,
             TextView good,
-            TextView time, HomeListItem.MovicesBean data, int p
+            TextView time, HMoiveItem data, final int p
     ) {
-        movie.setTag(p);
-        movie.setOnClickListener(this);
+        movie.setTag(data);
+        movie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemViewClickListener.onItemViewClick(v,p);
+            }
+        });
         VApplication.setBitmapEx(movie_iv, data.getCover_img());
         name.setText(data.getName());
         good.setText(data.getGrade());

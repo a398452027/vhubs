@@ -1,0 +1,273 @@
+<resources>
+
+    <dimen name="actionbar_height">48dp</dimen>
+
+    <!-- 引导界面 -->
+    <dimen name="btn_exp_min_w">90.5dp</dimen>
+    <dimen name="btn_exp_min_h">29.5dp</dimen>
+    <dimen name="dot_marginBottom">30dp</dimen>
+    <dimen name="btn_marginBottom">48.5dp</dimen>
+    <dimen name="sp_btnExperience_textSize">12.5sp</dimen>
+    <dimen name="sp_t_tab_s_textSize">18.5sp</dimen>
+    <dimen name="sp_t_tab_n_textSize">16.5sp</dimen>
+    <dimen name="navi_share_margin_r">11.5dp</dimen>
+    <!-- 推荐 -->
+    <dimen name="sp_movie_name">12.5sp</dimen>
+    <dimen name="sp_movie_score">11.5sp</dimen>
+    <dimen name="sp_movie_des">10.5sp</dimen>
+    <dimen name="mv_padding">7dp</dimen>
+    <dimen name="mv_padding_t">6dp</dimen>
+    <dimen name="mv_padding_top">10dp</dimen>
+    <dimen name="bar_h">41dp</dimen>
+    <dimen name="toast_w">184dp</dimen>
+    <dimen name="toast_h">118dp</dimen>
+    <dimen name="toast_padding_top">20dp</dimen>
+    <dimen name="toast_notice_padding_top">15.5dp</dimen>
+    <dimen name="sp_toast_size">13.5sp</dimen>
+    <!-- 全部 -->
+    <dimen name="sp_filter_size">13.5sp</dimen>
+    <dimen name="filter_padding_lr">9.5dp</dimen>
+    <dimen name="filter_padding_tb">13.5dp</dimen>
+    <dimen name="sp_filter_num">14.5sp</dimen>
+    <dimen name="sp_filter_con">14.5sp</dimen>
+    <dimen name="search_pad_t">15dp</dimen>
+    <dimen name="search_pad_l">10.5dp</dimen>
+    <dimen name="btn_pad_r">7.5dp</dimen>
+    <dimen name="btn_pad_t">6dp</dimen>
+    <dimen name="btn_pad_b">8dp</dimen>
+    <!-- 晚会 -->
+    <dimen name="party_padding">2.5dp</dimen>
+    <dimen name="party_v_img_min_w">70.0dp</dimen>
+    <dimen name="party_v_img_min_h">97.5dp</dimen>
+    <dimen name="party_t_padding">10.5dp</dimen>
+    <dimen name="party_t_padding_tb">10dp</dimen>
+    <dimen name="sp_party_t">12.5sp</dimen>
+    <!-- 资讯 -->
+    <dimen name="news_header_time_min_h">36.5dp</dimen>
+    <dimen name="sp_news_header_time">14.5sp</dimen>
+    <dimen name="news_padding">4.5dp</dimen>
+    <dimen name="ivw_news_item_width">110.0dp</dimen>
+    <dimen name="ivw_news_item_height">63.0dp</dimen>
+    <dimen name="sp_news_des">12.5sp</dimen>
+    <!-- 评论 -->
+    <dimen name="comm_padding_tb">11.5dp</dimen>
+    <dimen name="comm_padding_lr">5.0dp</dimen>
+    <dimen name="comm_t_padding_lr">8.5dp</dimen>
+    <dimen name="sp_b_comm">12.5sp</dimen>
+    <dimen name="comm_item_padding">14.5dp</dimen>
+    <dimen name="comm_score_l">10.5dp</dimen>
+    <dimen name="comm_score_r">8.5dp</dimen>
+    <dimen name="sp_comm_uname_size">12.5sp</dimen>
+    <dimen name="sp_comm_score_size">14.5sp</dimen>
+    <dimen name="sp_comm_cont_size">12.5sp</dimen>
+    <dimen name="sp_comm_time_size">11.5sp</dimen>
+    <dimen name="sp_comm_reply_size">12.5sp</dimen>
+    <dimen name="comm_margin_tb">14.5dp</dimen>
+    <dimen name="comm_score_t_l">15.0dp</dimen>
+    <dimen name="sp_comm_score_notice_size">11.5sp</dimen>
+    <dimen name="sp_comm_con_size">12.5sp</dimen>
+    <dimen name="comm_con_padding">11.5dp</dimen>
+    <dimen name="news_img_indicator_bg_width">72.5dp</dimen>
+    <dimen name="news_img_indicator_bg_height">20.5dp</dimen>
+    <dimen name="sp_news_img_indicator">12.5sp</dimen>
+    <dimen name="news_dp_top">20.5dp</dimen>
+    <dimen name="news_dp_left">18.5dp</dimen>
+    <dimen name="sp_news_content">14.5sp</dimen>
+    <dimen name="news_content_dp_title">10dp</dimen>
+    <dimen name="news_content_space">8dp</dimen>
+
+    <!-- 搜索 -->
+    <dimen name="search_padding">4.5dp</dimen>
+    <dimen name="sp_search">14.5sp</dimen>
+    <dimen name="history_padding">12.5dp</dimen>
+    <dimen name="history_b_d_margin_l">17.5dp</dimen>
+    <dimen name="history_t_margin">15.5dp</dimen>
+    <dimen name="history_margin">25.5dp</dimen>
+    <dimen name="history_v_padding">20.5dp</dimen>
+    <dimen name="sp_history_title_size">12.5sp</dimen>
+    <dimen name="sp_history_words_size">12.5sp</dimen>
+    <dimen name="hot_words_v_padding">10.5dp</dimen>
+    <dimen name="hot_words_padding_lr">38.5dp</dimen>
+
+    <!-- 直播 -->
+    <dimen name="liveitem_margin_left">15.5dp</dimen>
+    <dimen name="liveitem_margin_right">15.5dp</dimen>
+    <dimen name="liveitem_margin_top">14.5dp</dimen>
+    <dimen name="liveitem_margin_bottom">16dp</dimen>
+
+    <!-- 我的收藏 -->
+    <dimen name="favorite_margin">7.5dp</dimen>
+    <dimen name="favorite_dividerHeight">7.5dp</dimen>
+    <dimen name="favorite_itemmargin">4.5dp</dimen>
+    <dimen name="favorite_tvmargintop">4.5dp</dimen>
+    <dimen name="favorite_tvmarginleft">13.5dp</dimen>
+    <dimen name="favorite_tvratingleft">7.5dp</dimen>
+    <dimen name="favorite_btnwidth">85.5dp</dimen>
+    <dimen name="favorite_btnheight">26.5dp</dimen>
+    <dimen name="favorite_btnmarginbottom">4.5dp</dimen>
+    <dimen name="favorite_btnmarginright">4.5dp</dimen>
+    <dimen name="favorite_btntextsize">12.5sp</dimen>
+    <dimen name="favorite_btn_delete">14.5sp</dimen>
+
+    <!-- 播放记录 -->
+    <dimen name="his_itemmargin">4.5dp</dimen>
+    <dimen name="his_margin">3.75dp</dimen>
+    <dimen name="his_tvmmargintop">4.5dp</dimen>
+    <dimen name="his_dividerHeight">7.5dp</dimen>
+    <dimen name="his_tvmmarginleft">13dp</dimen>
+    <dimen name="his_btnmmarginbottom">4.5dp</dimen>
+    <dimen name="his_btnmmarginright">4.5dp</dimen>
+    <dimen name="his_textsize">11.5sp</dimen>
+    <dimen name="his_btnwidth">85.5dp</dimen>
+    <dimen name="his_btnheight">26.5dp</dimen>
+    <dimen name="history_img_min_w">75.5dp</dimen>
+    <dimen name="history_img_min_h">104.5dp</dimen>
+
+    <!-- 快进 -->
+    <dimen name="play_fast_w">130dp</dimen>
+    <dimen name="play_fast_h">70dp</dimen>
+    <dimen name="play_fast_margin_top">10dp</dimen>
+    <dimen name="sp_play_fast_time">12.5sp</dimen>
+
+    <!-- 声音 -->
+    <dimen name="volume_v_w">59dp</dimen>
+    <dimen name="volume_v_h">169dp</dimen>
+    <dimen name="volume_v_seekbar_w">2dp</dimen>
+    <dimen name="volume_v_padding">3dp</dimen>
+    <dimen name="volume_padding_left">20dp</dimen>
+
+    <!-- 大播放器 -->
+    <dimen name="player_pause_padding">13dp</dimen>
+    <dimen name="sp_player_play_time">14.5sp</dimen>
+    <dimen name="palyer_margin_right">5dp</dimen>
+    <dimen name="palyer_margin_left">35dp</dimen>
+    <dimen name="palyer_h">71dp</dimen>
+    <dimen name="palyer_seekbar_margin_top">8dp</dimen>
+    <dimen name="select_w">220dp</dimen>
+    <dimen name="select_h">110dp</dimen>
+    <dimen name="player_title_h">45dp</dimen>
+    <dimen name="player_buy_margin">5dp</dimen>
+    <dimen name="player_bug_height">39dp</dimen>
+    <dimen name="player_buy_padding_left">10dp</dimen>
+    <dimen name="sp_player_buy_text">13.5sp</dimen>
+    <dimen name="player_buy_open_margin">6.5dp</dimen>
+    <dimen name="player_buy_btn_height">26dp</dimen>
+
+    <!-- 影片详情页 -->
+    <dimen name="film_player_h">43dp</dimen>
+    <dimen name="film_player_padding_right">7dp</dimen>
+    <dimen name="sp_film_player_time">10.5sp</dimen>
+    <dimen name="film_player_padding_left">9dp</dimen>
+
+    <!-- 播放渠道 -->
+    <dimen name="select_notice_margin_left">15dp</dimen>
+    <dimen name="close_btn_margin_right">10dp</dimen>
+    <dimen name="sp_select_notice">13.5sp</dimen>
+    <dimen name="rgb_padding_left">70dp</dimen>
+    <dimen name="rgb_padding_top">15dp</dimen>
+    <dimen name="sp_channel">14.5sp</dimen>
+
+    <!-- 搜索 -->
+    <dimen name="sp_result_link_words_size">14.5sp</dimen>
+    <dimen name="result_link_item_p_l">42.0dp</dimen>
+    <dimen name="result_link_item_min_h">41.5dp</dimen>
+    <dimen name="result_item_title_m_l">11.5dp</dimen>
+    <dimen name="sp_result_size">12.5sp</dimen>
+    <dimen name="result_item_title_m_b">5.5dp</dimen>
+    <dimen name="result_item_title_m_t">15.5dp</dimen>
+    <dimen name="result_item_m_tb">15.5dp</dimen>
+    <dimen name="result_item_m_lr">11.5dp</dimen>
+    <dimen name="rlt_ivwVideoImg_layout_width">89.0dp</dimen>
+    <dimen name="rlt_ivwVideoImg_layout_height">120.5dp</dimen>
+    <dimen name="result_item_p_lr">10.5dp</dimen>
+    <dimen name="result_item_t_p_tb">10.5dp</dimen>
+    <dimen name="btn_s_p_w">85.5dp</dimen>
+    <dimen name="btn_s_p_h">26.5dp</dimen>
+    <dimen name="sp_btn_s_p_size">12.5sp</dimen>
+    <dimen name="sp_result_item_size">12.5sp</dimen>
+    <dimen name="sp_result_item_title_size">12.5sp</dimen>
+    <dimen name="sp_result_item_score_size">11.5sp</dimen>
+    <!-- 我的 -->
+    <dimen name="mv_vip_pading_l">3.5dp</dimen>
+    <dimen name="mv_avtar_pading_l">26dp</dimen>
+    <dimen name="btn_open_v_w">85.5dp</dimen>
+    <dimen name="btn_open_v_h">26.5dp</dimen>
+    <dimen name="sp_btn_open_v_size">12.5sp</dimen>
+    <dimen name="sp_t_user_name">14.5sp</dimen>
+    <dimen name="sp_t_user_info">11.5sp</dimen>
+    <dimen name="mine_info_n_p_tb">15.5dp</dimen>
+    <dimen name="mine_info_n_p_lr">27.0dp</dimen>
+    <dimen name="mine_a_min_w">60.5dp</dimen>
+    <dimen name="mine_a_min_h">60.5dp</dimen>
+    <dimen name="mine_t_p_lr">25.0dp</dimen>
+    <dimen name="mine_t_p_tb">10.0dp</dimen>
+    <dimen name="mine_i_p_lr">8.5dp</dimen>
+    <dimen name="mine_fun_d">35.5dp</dimen>
+    <dimen name="sp_t_user_func_item_size">14.5sp</dimen>
+    <dimen name="setting_t_b_min_w">73.5dp</dimen>
+    <dimen name="setting_t_b_min_h">28.5dp</dimen>
+    <dimen name="text_logo">11.5sp</dimen>
+    <dimen name="btn_marg">25dp</dimen>
+    <dimen name="sp_update_size">13sp</dimen>
+    <!-- 意见反馈 -->
+    <dimen name="sp_feed_title_size">11.5sp</dimen>
+    <dimen name="sp_feed_size">12.5sp</dimen>
+    <!-- 登录 -->
+    <dimen name="fpw_t">40dp</dimen>
+    <dimen name="login_p_tb">5.0dp</dimen>
+    <dimen name="login_p_lr">11.5dp</dimen>
+    <dimen name="sp_login_t_size">14.5sp</dimen>
+    <dimen name="login_f_d">35.5dp</dimen>
+    <dimen name="login_b_m_lr">25.5dp</dimen>
+    <dimen name="btn_login_m_t">30.5dp</dimen>
+
+    <!-- 注册，找回密码 ,绑定 -->
+    <dimen name="register_padding">7.5dp</dimen>
+    <dimen name="register_margin_top">28.5dp</dimen>
+    <dimen name="register_tvpadding_left">16dp</dimen>
+    <dimen name="register_tvpadding_top">14.5dp</dimen>
+    <dimen name="register_tvpadding_bottom">15dp</dimen>
+    <dimen name="register_tvsize">15sp</dimen>
+    <dimen name="register_mar_top">7.5dp</dimen>
+    <dimen name="register_btnheight">29.5dp</dimen>
+    <dimen name="register_btnsize">11.5sp</dimen>
+    <dimen name="register_btn_re">16.5sp</dimen>
+    <dimen name="register_btnpadding">13.5dp</dimen>
+    <dimen name="register_btn_re_hei">41.5dp</dimen>
+    <dimen name="register_btn_re_martop">31.5dp</dimen>
+    <dimen name="register_btn_re_marlr">18.5dp</dimen>
+    <dimen name="bind_tvsize">13.5sp</dimen>
+
+    <!-- 开通会员 -->
+    <dimen name="vip_fun_d">35.5dp</dimen>
+    <dimen name="vip_p_lr">25.5dp</dimen>
+    <dimen name="vip_p_tb">16.0dp</dimen>
+    <dimen name="vip_t_p_tb">21.5dp</dimen>
+    <dimen name="sp_vip_uname_size">14.5sp</dimen>
+    <dimen name="vip_t_m_t">30.5dp</dimen>
+    <dimen name="vip_t_m_b">15.5dp</dimen>
+    <dimen name="sp_vip_notice_size">12.5sp</dimen>
+    <dimen name="vip_i_m_t">14.0dp</dimen>
+    <dimen name="sp_vip_img_des_size">11.5sp</dimen>
+    <dimen name="sp_vip_item_size">11.5sp</dimen>
+    <dimen name="vip_item_img_m_lr">13.5dp</dimen>
+    <dimen name="vip_item_img_m_tb">5.5dp</dimen>
+    <dimen name="vip_item_img_m_b">4.5dp</dimen>
+    <dimen name="vip_item_min_h">43.0dp</dimen>
+    <!-- 左侧菜单 -->
+    <dimen name="sp_l_menu_size">14.5sp</dimen>
+    <dimen name="l_menu_m_b">15.5dp</dimen>
+    <dimen name="l_menu_m_t">30dp</dimen>
+    <dimen name="sp_l_menu_t_size">12.5sp</dimen>
+    <!-- 电影详情 -->
+    <dimen name="year_l">5dp</dimen>
+    <dimen name="film_p">12.5dp</dimen>
+    <dimen name="film_d">15.5dp</dimen>
+    <dimen name="sp_film_t">12.5sp</dimen>
+    <dimen name="sp_film_score">11.5sp</dimen>
+    <dimen name="sp_film_des">13.5sp</dimen>
+    <dimen name="film_min_w">64.0dp</dimen>
+    <dimen name="film_min_h">86.0dp</dimen>
+    <dimen name="dp_channel">100dp</dimen>
+
+</resources>

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import org.gtq.vhubs.R;
 import org.gtq.vhubs.core.VApplication;
 import org.gtq.vhubs.dao.ClassificationItem;
+import org.gtq.vhubs.dao.FavoritesMoive;
 import org.gtq.vhubs.dao.HMoiveItem;
 import org.gtq.vhubs.dao.HomeListItem;
 
@@ -20,12 +21,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import support.bean.IDObject;
 import support.ui.adapter.SetBaseAdapter;
 
 /**
  * Created by guo on 2016/6/5.
  */
-public class HMoiveAdapter extends SetBaseAdapter<HMoiveItem> {
+public  class HMoiveAdapter<T> extends SetBaseAdapter<T> {
 
     OnItemViewClickListener onItemViewClickListener;
     Context context;
@@ -54,7 +56,12 @@ public class HMoiveAdapter extends SetBaseAdapter<HMoiveItem> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        HMoiveItem moiveItem = (HMoiveItem) getItem(position);
+        HMoiveItem moiveItem = null;
+        if(getItem(position) instanceof HMoiveItem){
+            moiveItem = (HMoiveItem) getItem(position);
+        }else if(getItem(position) instanceof FavoritesMoive){
+            moiveItem = ((FavoritesMoive) getItem(position)).gethMoiveItem();
+        }
         VApplication.setBitmapEx(holder.image, moiveItem.getCover_img());
         holder.name.setText(moiveItem.getName());
         holder.good.setText(moiveItem.getGrade());

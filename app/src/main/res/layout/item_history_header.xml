@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:background="@drawable/side_nav_bar"
+    android:gravity="center"
+    android:shadowColor="#ffee00ff"
+    android:shadowDx="0"
+    android:shadowDy="0"
+    android:shadowRadius="25"
+    android:text="DECEMBER 2015"
+    android:textColor="@color/text_pink"
+    android:textSize="20sp"
+    android:textStyle="bold" />

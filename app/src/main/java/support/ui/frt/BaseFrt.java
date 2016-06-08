@@ -37,6 +37,22 @@ public class BaseFrt extends Fragment {
 	}
 
 	@Override
+	public void onHiddenChanged(boolean hidden) {
+		super.onHiddenChanged(hidden);
+		if(mLocalActivityManager!=null){
+			if(hidden){
+
+				((ActivityToFragmentInterface) mLocalActivityManager
+						.getActivity(activityId)).Pause();
+			}else{
+				((ActivityToFragmentInterface) mLocalActivityManager
+						.getActivity(activityId)).Resume();
+			}
+		}
+
+	}
+
+	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);

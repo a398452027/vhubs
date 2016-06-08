@@ -13,4 +13,61 @@
     <color name="h_movie_white">#81478b</color>
     <color name="nav_item_p">#181028</color>
     <color name="home_move_name_bg">#d829122d</color>
+
+    <!-- normal -->
+    <color name="search_item_bg">#dde1e2</color>
+    <color name="nor_bg">#F0F0F0</color>
+    <color name="nor_bg_p">#e1edf2</color>
+    <color name="nor_white">#FFFFFF</color>
+    <color name="nor_black">#000000</color>
+    <color name="nor_transparent">#00000000</color>
+    <color name="nor_grey">#DDE1E2</color>
+    <color name="nor_orange">#FF2400</color>
+    <color name="nor_blue">#2871BE</color>
+    <color name="nor_face_bg">#eef1f4</color>
+    <color name="nor_star_score">#FDA590</color>
+    <color name="nor_video_bg">#f6f6f6</color>
+    <color name="act_img_bg">#DEE1E4</color>
+    <color name="nor_tab_bg">#E6E6E6</color>
+    <color name="nor_left_title_bg">#2C353A</color>
+    <color name="nor_left_parent_bg">#DDE1E2</color>
+    <color name="nor_left_child_bg">#F0F0F0</color>
+    <color name="nor_line">#BFBFBF</color>
+    <color name="txt_grey">#666666</color>
+    <color name="txt_blue">#1687C9</color>
+    <color name="txt_dark_grey">#333333</color>
+    <color name="actionbar_bg">#2C353A</color>
+
+    <drawable name="abs__bg">#aa000000</drawable>
+    <!-- 搜索 -->
+    <color name="nor_search_grey">#999999</color>
+    <color name="nor_search_black">#333333</color>
+    <color name="nor_search_video_score">#ff7e00</color>
+    <color name="nor_search_other_info">#666666</color>
+    <color name="nor_search_line">#d5d5d7</color>
+
+    <!-- 全部 -->
+    <color name="nor_filter_bg">#e6e6e6</color>
+    <color name="nor_filter_text_bg">#168ec5</color>
+
+    <!-- 影片详情 -->
+    <color name="nor_comment_score">#dda06b</color>
+    <color name="nor_tab_indicator">#168fc6</color>
+    <color name="nor_mini_play_time">#cccccc</color>
+    <color name="nor_play_time">#1687c9</color>
+    <color name="nor_channel_line">#3b3e3e</color>
+    <color name="nor_control_bg">#2a2a2b</color>
+
+    <drawable name="nor_top_bg">#e0000000</drawable>
+    <drawable name="nor_progress_bg">#FFFFFF</drawable>
+    <drawable name="nor_live">#00000000</drawable>
+    <color name="nor_tab_line">#cdcdcd</color>
+    <!-- 灰色 -->
+    <color name="nor_textColor_g_9">#999999</color>
+    <color name="nor_textColor_g_6">#666666</color>
+    <!-- 黑色 -->
+    <color name="nor_textColor_d_n">#333333</color>
+    <!-- 蓝色 -->
+    <color name="nor_textColor_b_n">#168EC5</color>
+
 </resources>

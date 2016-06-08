@@ -13,4 +13,35 @@
     <dimen name="home_movie_h">150dp</dimen>
 
     <dimen name="favorites_head_h">140dp</dimen>
+    <dimen name="history_head_h">100dp</dimen>
+
+    <!-- 导航 -->
+    <dimen name="sp_navi_text">18sp</dimen>
+    <dimen name="navi_func_margin_r">6dp</dimen>
+    <dimen name="navi_share_margin_r">11.5dp</dimen>
+    <dimen name="shadow_width">15dp</dimen>
+    <dimen name="slidingmenu_width">60dp</dimen>
+    <dimen name="film_detail_navi_min_h">36.5dp</dimen>
+    <dimen name="sp_film_detail_navi">14.5sp</dimen>
+    <dimen name="feedback_edt_height">200dp</dimen>
+    <!-- video_item -->
+    <dimen name="rlt_ivwVideoImg_layout_width">89.0dp</dimen>
+    <dimen name="rlt_ivwVideoImg_layout_height">120.5dp</dimen>
+    <dimen name="gvw_horizontalSpacing">10dp</dimen>
+    <dimen name="horizontalSpacing">10dp</dimen>
+
+    <!-- news_item -->
+    <dimen name="ivw_news_item_width">123.0dp</dimen>
+    <dimen name="ivw_news_item_height">63.0dp</dimen>
+    <dimen name="ivw_news_item_playicon_width">30dp</dimen>
+    <dimen name="sp_update_size">12sp</dimen>
+
+    <!-- VideoView height -->
+    <dimen name="vdv_height">230dp</dimen>
+
+    <dimen name="dp_padding">10dp</dimen>
+
+    <dimen name="dp_channel">133.333333dp</dimen>
+    <dimen name="film_player_h">43dp</dimen>
+    <dimen name="player_title_h">45dp</dimen>
 </resources>
