@@ -10,7 +10,7 @@
         android:background="@drawable/side_nav_bar" />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/select_tab"
+        android:layout_height="@dimen/search_tab"
         android:background="@drawable/side_nav_bar"
         android:orientation="horizontal">
 

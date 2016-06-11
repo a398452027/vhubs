@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/player_title_h"
-    android:alpha="0.7"
-    android:background="@color/nor_control_bg" >
+    android:background="@color/nor_control_bg"
+    android:alpha="0.7" >
 
     <ImageButton
         android:id="@+id/btnBack"
@@ -13,12 +13,22 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/navi_func_margin_r"
         android:background="@drawable/selector_btn_back" />
+    <ImageButton
+        android:id="@+id/btnShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/btnCollect"
+        android:visibility="gone"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/navi_share_margin_r"
+        android:background="@mipmap/share" />
 
     <ImageButton
         android:id="@+id/btnCollect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:visibility="gone"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/navi_share_margin_r"
         android:background="@drawable/selector_btn_favourite" />
@@ -27,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/btnCollect"
+        android:layout_toLeftOf="@id/btnShare"
         android:layout_toRightOf="@id/btnBack" >
 
         <TextView

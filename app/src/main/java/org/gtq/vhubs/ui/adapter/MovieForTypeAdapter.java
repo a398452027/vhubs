@@ -5,15 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.gtq.vhubs.R;
 import org.gtq.vhubs.core.VApplication;
-import org.gtq.vhubs.dao.ClassificationItem;
-import org.gtq.vhubs.dao.HomeListItem;
-import org.gtq.vhubs.dao.MovieForType;
+import org.gtq.vhubs.dao.HMoiveItem;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,12 +23,12 @@ import support.ui.adapter.SetBaseAdapter;
 /**
  * Created by guo on 2016/6/4.
  */
-public class MovieForTypeAdapter extends SetBaseAdapter<MovieForType> {
+public class MovieForTypeAdapter extends SetBaseAdapter<HMoiveItem> {
 
     OnItemViewClickListener onItemViewClickListener;
     Context context;
 
-    ArrayList<List<MovieForType>> oList;
+    ArrayList<List<HMoiveItem>> oList;
 
 
     public MovieForTypeAdapter(Context context, OnItemViewClickListener onItemViewClickListener) {
@@ -70,9 +67,9 @@ public class MovieForTypeAdapter extends SetBaseAdapter<MovieForType> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        List<MovieForType> list = (List<MovieForType>) getItem(position);
+        List<HMoiveItem> list = (List<HMoiveItem>) getItem(position);
         for (int i = 0; i < list.size(); i++) {
-            MovieForType normalsBean = list.get(i);
+            HMoiveItem normalsBean = list.get(i);
             switch (i) {
                 case 0:
                     setMoveData(holder.movie_01, holder.movie_iv01, holder.name_01, holder.good_01, holder.time_01, normalsBean, position);
@@ -108,7 +105,7 @@ public class MovieForTypeAdapter extends SetBaseAdapter<MovieForType> {
             ImageView movie_iv,
             TextView name,
             TextView good,
-            TextView time, MovieForType data, final int p
+            TextView time, HMoiveItem data, final int p
     ) {
         movie.setTag(data);
         movie.setOnClickListener(new View.OnClickListener() {
@@ -133,24 +130,24 @@ public class MovieForTypeAdapter extends SetBaseAdapter<MovieForType> {
     }
 
     @Override
-    public void replaceAll(Collection<MovieForType> collection) {
-
+    public void replaceAll(Collection<HMoiveItem> collection) {
+        oList.clear();
         super.replaceAll(collection);
         initOList(mListObject);
         notifyDataSetChanged();
     }
 
     @Override
-    public void addAll(Collection<MovieForType> collection) {
+    public void addAll(Collection<HMoiveItem> collection) {
 
         super.addAll(collection);
         initOList(mListObject);
         notifyDataSetChanged();
     }
 
-    private void initOList(List<MovieForType> collection) {
+    private void initOList(List<HMoiveItem> collection) {
         for (int i = 0; i < collection.size();) {
-            List<MovieForType> list = new ArrayList<>();
+            List<HMoiveItem> list = new ArrayList<>();
             for (int j = 0; j < 3; j++) {
                 list.add(collection.get(i));
                 i++;

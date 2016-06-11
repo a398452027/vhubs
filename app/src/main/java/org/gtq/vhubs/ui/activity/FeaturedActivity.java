@@ -248,10 +248,10 @@ public class FeaturedActivity extends VBaseActivity implements ScrollBottomLoadL
             //收藏测试
 //            DBUtil.addToFavorites((HMoiveItem) view.getTag());
             //记录测试
-            DBUtil.addToHistory((HMoiveItem) view.getTag());
+//            DBUtil.addToHistory((HMoiveItem) view.getTag());
 
             //影片点击
-
+            FilmDetailsAct.Launch(this,((HMoiveItem) view.getTag()).getId(),((HMoiveItem) view.getTag()).getVedio_url());
 
         }
     }

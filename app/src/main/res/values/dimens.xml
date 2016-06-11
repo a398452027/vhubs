@@ -8,6 +8,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="nav_icon_w">20dp</dimen>
 
+    <dimen name="search_tab">58dp</dimen>
     <dimen name="select_tab">48dp</dimen>
     <dimen name="home_vp_h">180dp</dimen>
     <dimen name="home_movie_h">150dp</dimen>

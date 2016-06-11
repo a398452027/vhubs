@@ -9,9 +9,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.videodemo.FilmDetailsAct;
+
 import org.gtq.vhubs.R;
 import org.gtq.vhubs.core.VApplication;
 import org.gtq.vhubs.dao.FavoritesMoive;
+import org.gtq.vhubs.dao.HMoiveItem;
 import org.gtq.vhubs.dao.HistoryMoive;
 import org.gtq.vhubs.ui.adapter.HMoiveAdapter;
 import org.gtq.vhubs.ui.adapter.HistoryAdapter;
@@ -31,11 +34,12 @@ import rx.schedulers.Schedulers;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import support.db.XDB;
 import support.ui.activity.VBaseActivity;
+import support.ui.adapter.SetBaseAdapter;
 
 /**
  * Created by guo on 2016/6/5.
  */
-public class HistoryActivity extends VBaseActivity {
+public class HistoryActivity extends VBaseActivity implements SetBaseAdapter.OnItemViewClickListener{
 
     LinearLayout pb_ll;
     TextView fail_tv;
@@ -49,7 +53,7 @@ public class HistoryActivity extends VBaseActivity {
         pb_ll = (LinearLayout) findViewById(R.id.pb_ll);
         fail_tv = (TextView) findViewById(R.id.fail_tv);
         lv = (StickyListHeadersListView) findViewById(R.id.lv);
-        adapter = new HistoryAdapter(this);
+        adapter = new HistoryAdapter(this,this);
         lv.setAdapter(adapter);
         lv.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -133,4 +137,13 @@ public class HistoryActivity extends VBaseActivity {
     }
 
 
+    @Override
+    public void onItemViewClick(View view, int position) {
+        FilmDetailsAct.Launch(this,((HMoiveItem) view.getTag()).getId(),((HMoiveItem) view.getTag()).getVedio_url());
+    }
+
+    @Override
+    public void onItemViewLongClick(View view, int position) {
+
+    }
 }

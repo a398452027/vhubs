@@ -6,11 +6,12 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.alibaba.fastjson.JSON;
+import com.videodemo.FilmDetailsAct;
 
 import org.gtq.vhubs.R;
 import org.gtq.vhubs.core.VApplication;
 import org.gtq.vhubs.dao.ClassificationItem;
-import org.gtq.vhubs.dao.MovieForType;
+import org.gtq.vhubs.dao.HMoiveItem;
 import org.gtq.vhubs.ui.adapter.MovieForTypeAdapter;
 import org.gtq.vhubs.utils.HttpUtils;
 import org.json.JSONArray;
@@ -49,7 +50,7 @@ public class NewTypeActivity extends VBaseActivity  implements ScrollBottomLoadL
         typeId = getIntent().getStringExtra(BaseFrt.FRTTAG_NAME);
         setContentView(R.layout.activity_hottype);
         lv = (ScrollBottomLoadListView) findViewById(R.id.lv);
-        lv.setIsAutoLoad(false);
+
         movieForTypeAdapter = new MovieForTypeAdapter(this, this);
         lv.setAdapter(movieForTypeAdapter);
         lv.startRun();
@@ -89,10 +90,10 @@ public class NewTypeActivity extends VBaseActivity  implements ScrollBottomLoadL
                                 page++;
                                 JSONArray jsonArray = bean.getJSONObject("data").getJSONArray("movices");
                                 lv.hasMoreLoad(bean.getJSONObject("data").getBoolean("hasMore"));
-                                List<MovieForType> list = new ArrayList<MovieForType>();
+                                List<HMoiveItem> list = new ArrayList<HMoiveItem>();
                                 for (int i = 0; i < jsonArray.length(); i++) {
-                                    MovieForType movieForType = JSON.parseObject(jsonArray.getJSONObject(i)
-                                            .toString(), MovieForType.class);
+                                    HMoiveItem movieForType = JSON.parseObject(jsonArray.getJSONObject(i)
+                                            .toString(), HMoiveItem.class);
                                     list.add(movieForType);
                                 }
                                 movieForTypeAdapter.addAll(list);
@@ -143,10 +144,10 @@ public class NewTypeActivity extends VBaseActivity  implements ScrollBottomLoadL
                                 page=2;
                                 JSONArray jsonArray = bean.getJSONObject("data").getJSONArray("movices");
                                 lv.hasMoreLoad(bean.getJSONObject("data").getBoolean("hasMore"));
-                                List<MovieForType> list = new ArrayList<MovieForType>();
+                                List<HMoiveItem> list = new ArrayList<HMoiveItem>();
                                 for (int i = 0; i < jsonArray.length(); i++) {
-                                    MovieForType movieForType = JSON.parseObject(jsonArray.getJSONObject(i)
-                                            .toString(), MovieForType.class);
+                                    HMoiveItem movieForType = JSON.parseObject(jsonArray.getJSONObject(i)
+                                            .toString(), HMoiveItem.class);
                                     list.add(movieForType);
                                 }
                                 loadDataTolist(list);
@@ -166,14 +167,14 @@ public class NewTypeActivity extends VBaseActivity  implements ScrollBottomLoadL
 
     }
 
-    private void loadDataTolist(List<MovieForType> list) throws JSONException {
+    private void loadDataTolist(List<HMoiveItem> list) throws JSONException {
         movieForTypeAdapter.replaceAll(list);
     }
 
 
     @Override
     public void onItemViewClick(View view, int position) {
-
+        FilmDetailsAct.Launch(this,((HMoiveItem) view.getTag()).getId(),((HMoiveItem) view.getTag()).getVedio_url());
     }
 
     @Override

@@ -28,15 +28,15 @@ public class HistoryAdapter<T> extends SetBaseAdapter<T> implements StickyListHe
 
 
     Context context;
+    OnItemViewClickListener onItemViewClickListener;
 
-
-    public HistoryAdapter(Context context) {
+    public HistoryAdapter(Context context,   OnItemViewClickListener onItemViewClickListener) {
         this.context = context;
-
+        this.onItemViewClickListener = onItemViewClickListener;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         if (convertView == null) {
             holder = new ViewHolder();
@@ -54,7 +54,13 @@ public class HistoryAdapter<T> extends SetBaseAdapter<T> implements StickyListHe
             holder = (ViewHolder) convertView.getTag();
         }
         HMoiveItem moiveItem = ((HistoryMoive) getItem(position)).gethMoiveItem();
-
+        holder.all_ll.setTag(moiveItem);
+        holder.all_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemViewClickListener.onItemViewClick(v,position);
+            }
+        });
         VApplication.setBitmapEx(holder.image, moiveItem.getCover_img());
         holder.name.setText(moiveItem.getName());
         holder.good.setText(moiveItem.getGrade());

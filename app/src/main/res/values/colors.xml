@@ -56,7 +56,7 @@
     <color name="nor_mini_play_time">#cccccc</color>
     <color name="nor_play_time">#1687c9</color>
     <color name="nor_channel_line">#3b3e3e</color>
-    <color name="nor_control_bg">#2a2a2b</color>
+    <color name="nor_control_bg">#a02a2a2b</color>
 
     <drawable name="nor_top_bg">#e0000000</drawable>
     <drawable name="nor_progress_bg">#FFFFFF</drawable>

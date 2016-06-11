@@ -25,6 +25,7 @@ import android.os.PowerManager;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
 import android.view.GestureDetector;
@@ -45,16 +46,33 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.common.ui.base.BaseAct;
 
 import org.gtq.vhubs.R;
+import org.gtq.vhubs.core.VApplication;
+import org.gtq.vhubs.dao.HMoiveItem;
 import org.gtq.vhubs.ui.adapter.XFragmentAdapter;
 import org.gtq.vhubs.ui.fragment.MoreMoiveFragment;
 import org.gtq.vhubs.ui.fragment.TrailerFragment;
+import org.gtq.vhubs.utils.DBUtil;
+import org.gtq.vhubs.utils.HttpUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
+import support.utils.SystemUtils;
 
 
 public class FilmDetailsAct extends BaseAct implements
@@ -96,6 +114,7 @@ public class FilmDetailsAct extends BaseAct implements
     private RelativeLayout mTitleView = null;
     private ImageButton btnBack;
     private ImageButton btnCollect;
+    private ImageButton btnShare;
     private TextView tvwNaviTitle;
 
     // DRM加密播放器
@@ -203,20 +222,47 @@ public class FilmDetailsAct extends BaseAct implements
     protected RelativeLayout tab_1;
     protected ImageView select_iv0;
     protected ImageView select_iv1;
+    TextView watch_time;
+    ImageView favorites;
+    ImageView share;
+    TrailerFragment trailer;
+    MoreMoiveFragment more;
 
     protected ArrayList<Fragment> fragmentsList;
+
+    HMoiveItem currentMoive;
+
     private void initPager() {
         tab_0 = (RelativeLayout) findViewById(R.id.tab_0);
         tab_1 = (RelativeLayout) findViewById(R.id.tab_1);
         vprRelateFilm = (ViewPager) findViewById(R.id.vprRelateFilm);
         select_iv0 = (ImageView) findViewById(R.id.select_iv0);
         select_iv1 = (ImageView) findViewById(R.id.select_iv1);
+        favorites = (ImageView) findViewById(R.id.favorites);
+        favorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentMoive != null) {
+                    DBUtil.addToFavorites(currentMoive);
+                }
+            }
+        });
+        share = (ImageView) findViewById(R.id.share);
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentMoive != null) {
+                    SystemUtils.shareMsg(FilmDetailsAct.this, "ddd0", "ddd1", "ddd2", null);
+                }
+            }
+        });
+        watch_time = (TextView) findViewById(R.id.watch_time);
 
         // Fragment容器
         fragmentsList = new ArrayList<Fragment>();
         // 生成每个tab对应的fragment
-        TrailerFragment trailer = new TrailerFragment();
-        MoreMoiveFragment more=new MoreMoiveFragment();
+        trailer = new TrailerFragment();
+        more = new MoreMoiveFragment();
 
         fragmentsList.add(trailer);
         fragmentsList.add(more);
@@ -224,7 +270,7 @@ public class FilmDetailsAct extends BaseAct implements
         vprRelateFilm.setAdapter(new XFragmentAdapter(
                 getSupportFragmentManager(), fragmentsList));
         // 设置默认的视图为第1个
-        vprRelateFilm.setCurrentItem(1);
+        vprRelateFilm.setCurrentItem(0);
         // 给Viewpager添加监听事件
         vprRelateFilm.setOnPageChangeListener(initOnPageChangeListener());
         tab_0.setOnClickListener(new View.OnClickListener() {
@@ -241,19 +287,21 @@ public class FilmDetailsAct extends BaseAct implements
         });
         select_iv0.getBackground().setAlpha(255);
         select_iv1.getBackground().setAlpha(0);
+
     }
-    protected  ViewPager.OnPageChangeListener initOnPageChangeListener(){
+
+    protected ViewPager.OnPageChangeListener initOnPageChangeListener() {
         return new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                switch (position){
+                switch (position) {
                     case 0:
-                        select_iv0.getBackground().setAlpha((int)(255*(1-positionOffset)));
-                        select_iv1.getBackground().setAlpha((int)(255*positionOffset));
+                        select_iv0.getBackground().setAlpha((int) (255 * (1 - positionOffset)));
+                        select_iv1.getBackground().setAlpha((int) (255 * positionOffset));
                         break;
                     case 1:
-                        select_iv0.getBackground().setAlpha((int)(255*positionOffset));
-                        select_iv1.getBackground().setAlpha((int)(255*(1-positionOffset)));
+                        select_iv0.getBackground().setAlpha((int) (255 * positionOffset));
+                        select_iv1.getBackground().setAlpha((int) (255 * (1 - positionOffset)));
 
                         break;
                 }
@@ -269,6 +317,68 @@ public class FilmDetailsAct extends BaseAct implements
 
             }
         };
+    }
+
+    private void loadMoiveMsgForNet() {
+        if (TextUtils.isEmpty(id)) {
+            return;
+        } else {
+            Observable.just("").doOnSubscribe(new Action0() {
+                @Override
+                public void call() {
+
+                }
+            }).observeOn(Schedulers.io())
+                    .map(new Func1<String, JSONObject>() {
+                        @Override
+                        public JSONObject call(String s) {
+
+
+                            try {
+                                return new JSONObject(HttpUtils.doPost("movice", "detail", id));
+                            } catch (Exception e) {
+                                VApplication.toast(getString(R.string.net_fail));
+                            }
+                            return null;
+                        }
+                    }).observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Action1<JSONObject>() {
+                        @Override
+                        public void call(JSONObject bean) {
+
+                            try {
+                                if (bean.getInt("code") != 0) {
+                                    VApplication.toastJsonError(bean);
+                                } else {
+                                    JSONArray jsonArray = bean.getJSONObject("data").getJSONArray("imgs");
+                                    List<String> urls = new ArrayList<String>();
+                                    for (int i = 0; i < jsonArray.length(); i++) {
+                                        urls.add(jsonArray.getString(i));
+                                    }
+                                    trailer.setUrls(urls);
+                                    currentMoive = JSON.parseObject(bean.getJSONObject("data").toString(), HMoiveItem.class);
+                                    if (!TextUtils.isEmpty(currentMoive.getCategory_id())) {
+                                        more.setCategory_id(currentMoive.getCategory_id());
+                                    }
+                                    if (!TextUtils.isEmpty(currentMoive.getName())) {
+                                        tvwNaviTitle.setText(currentMoive.getName());
+                                    }
+                                    watch_time.setText(currentMoive.getShow_play_time());
+                                    DBUtil.addToHistory(currentMoive);
+                                }
+                            } catch (JSONException e) {
+                                VApplication.toast(getString(R.string.net_fail));
+                            }
+
+
+                        }
+                    }, new Action1<Throwable>() {
+                        @Override
+                        public void call(Throwable throwable) {
+                            VApplication.toast(getString(R.string.net_fail));
+                        }
+                    });
+        }
     }
 
     @Override
@@ -298,6 +408,7 @@ public class FilmDetailsAct extends BaseAct implements
         setContentView(R.layout.act_film_details);
         instance();
         initPager();
+        loadMoiveMsgForNet();
     }
 
     private void instance() {
@@ -504,13 +615,11 @@ public class FilmDetailsAct extends BaseAct implements
                 if (observer.isScreenOn((PowerManager) FilmDetailsAct.this
                         .getSystemService(Activity.POWER_SERVICE))) {
                     mediaPlayer.start();
-                    LogUtils.d("11111111111111111111111111");
                 }
                 playAble = true;
                 if (observer.isScreenOn((PowerManager) FilmDetailsAct.this
                         .getSystemService(Activity.POWER_SERVICE))) {
                     videoView.start();
-                    LogUtils.d("222222222222222222");
                 }
                 if (CHANGE_URL) {
                     if (CHANGE_URL_TIME != 0) {
@@ -558,7 +667,6 @@ public class FilmDetailsAct extends BaseAct implements
                     }
                 }
                 mHandler.sendEmptyMessage(4);
-                LogUtils.d("dddddddddddddddddd");
             }
         });
 
@@ -608,6 +716,7 @@ public class FilmDetailsAct extends BaseAct implements
                     .getDimensionPixelSize(R.dimen.player_title_h)));
             btnBack = (ImageButton) mTitleView.findViewById(R.id.btnBack);
             btnCollect = (ImageButton) mTitleView.findViewById(R.id.btnCollect);
+            btnShare = (ImageButton) mTitleView.findViewById(R.id.btnShare);
             tvwNaviTitle = (TextView) mTitleView
                     .findViewById(R.id.tvwNaviTitle);
 //            tvwNaviTitle.setText(title);
@@ -615,6 +724,7 @@ public class FilmDetailsAct extends BaseAct implements
             titleController.addView(mTitleView);
             btnBack.setOnClickListener(this);
             btnCollect.setOnClickListener(this);
+            btnShare.setOnClickListener(this);
             tvwNaviTitle.setOnClickListener(this);
             mTitleView.setOnClickListener(new View.OnClickListener() {
 
@@ -676,7 +786,7 @@ public class FilmDetailsAct extends BaseAct implements
         maxVolume = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         currentVolume = mAudioManager
                 .getStreamVolume(AudioManager.STREAM_MUSIC);
-        mSoundView = View.inflate(this, R.layout.box_sound_change, null);
+        mSoundView = View.inflate(this, R.layout.full_box_sound_change, null);
         mSoundWindow = new PopupWindow(mSoundView, RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         mSoundWindow.setFocusable(false);
@@ -1037,8 +1147,8 @@ public class FilmDetailsAct extends BaseAct implements
                     } else {
                         // mSoundWindow.showAtLocation(videoView, Gravity.LEFT
                         // | Gravity.CENTER_VERTICAL, 40, 0);
-                        mSoundWindow.showAtLocation(videoView, Gravity.LEFT
-                                | Gravity.CENTER_VERTICAL, 40, 0);
+                        mSoundWindow.showAtLocation(videoView, Gravity.CENTER
+                              , 0, 0);
                         mSoundWindow.update();
                     }
                     delayHideController(3000);
@@ -1085,6 +1195,12 @@ public class FilmDetailsAct extends BaseAct implements
     // 加载竖屏时的控制视图
     private void loadPortraitController() {
         if (rltPortrait == null) {
+            if (btnCollect != null) {
+                btnCollect.setVisibility(View.GONE);
+            }
+            if (btnShare != null) {
+                btnShare.setVisibility(View.GONE);
+            }
             rltPortrait = (RelativeLayout) LayoutInflater.from(this).inflate(
                     R.layout.box_mini_controller, null);
             RelativeLayout rtlController = (RelativeLayout) rltPortrait
@@ -1159,6 +1275,8 @@ public class FilmDetailsAct extends BaseAct implements
     // 加载横屏时的控制视图
     private void loadLandScapeController() {
         if (rltLandScape == null) {
+            btnCollect.setVisibility(View.VISIBLE);
+            btnShare.setVisibility(View.VISIBLE);
             rltLandScape = (RelativeLayout) LayoutInflater.from(this).inflate(
                     R.layout.box_full_controller, null);
             RelativeLayout rtlController = (RelativeLayout) rltLandScape
@@ -1726,6 +1844,15 @@ public class FilmDetailsAct extends BaseAct implements
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btnCollect:
+                if (currentMoive != null) {
+                    DBUtil.addToFavorites(currentMoive);
+                }
+                break;
+            case R.id.btnShare:
+                SystemUtils.shareMsg(FilmDetailsAct.this, "ddd0", "ddd1", "ddd2", null);
+                break;
+
             case R.id.btnPlayOrPausePortrait:
 
                 if (videoView != null && videoView.isPlaying()) {
@@ -1803,8 +1930,8 @@ public class FilmDetailsAct extends BaseAct implements
                     // mSoundWindow.showAtLocation(videoView,
                     // Gravity.CENTER_VERTICAL
                     // | Gravity.LEFT, 40, 0);
-                    mSoundWindow.showAtLocation(videoView, Gravity.CENTER_VERTICAL
-                            | Gravity.LEFT, 40, 0);
+                    mSoundWindow.showAtLocation(videoView, Gravity.CENTER
+                            , 0, 0);
                     mSoundWindow.update();
                 }
                 delayHideController();

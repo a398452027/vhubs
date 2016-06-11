@@ -7,13 +7,13 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.alibaba.fastjson.JSON;
+import com.videodemo.FilmDetailsAct;
 
 import org.gtq.vhubs.R;
 import org.gtq.vhubs.core.VApplication;
-import org.gtq.vhubs.dao.MovieForType;
+import org.gtq.vhubs.dao.HMoiveItem;
 import org.gtq.vhubs.ui.adapter.MovieForTypeAdapter;
 import org.gtq.vhubs.utils.HttpUtils;
 import org.json.JSONArray;
@@ -33,7 +33,6 @@ import support.ui.activity.VBaseActivity;
 import support.ui.adapter.SetBaseAdapter;
 import support.ui.view.PulldownableListView;
 import support.ui.view.ScrollBottomLoadListView;
-import support.utils.SystemUtils;
 
 /**
  * Created by gtq on 2016/6/8.
@@ -98,10 +97,10 @@ public class AllMoiveForHotActivity extends VBaseActivity implements ScrollBotto
                                 page++;
                                 JSONArray jsonArray = bean.getJSONObject("data").getJSONArray("movices");
                                 lv.hasMoreLoad(bean.getJSONObject("data").getBoolean("hasMore"));
-                                List<MovieForType> list = new ArrayList<MovieForType>();
+                                List<HMoiveItem> list = new ArrayList<HMoiveItem>();
                                 for (int i = 0; i < jsonArray.length(); i++) {
-                                    MovieForType movieForType = JSON.parseObject(jsonArray.getJSONObject(i)
-                                            .toString(), MovieForType.class);
+                                    HMoiveItem movieForType = JSON.parseObject(jsonArray.getJSONObject(i)
+                                            .toString(), HMoiveItem.class);
                                     list.add(movieForType);
                                 }
                                 movieForTypeAdapter.addAll(list);
@@ -152,10 +151,10 @@ public class AllMoiveForHotActivity extends VBaseActivity implements ScrollBotto
                                 page = 2;
                                 JSONArray jsonArray = bean.getJSONObject("data").getJSONArray("movices");
                                 lv.hasMoreLoad(bean.getJSONObject("data").getBoolean("hasMore"));
-                                List<MovieForType> list = new ArrayList<MovieForType>();
+                                List<HMoiveItem> list = new ArrayList<HMoiveItem>();
                                 for (int i = 0; i < jsonArray.length(); i++) {
-                                    MovieForType movieForType = JSON.parseObject(jsonArray.getJSONObject(i)
-                                            .toString(), MovieForType.class);
+                                    HMoiveItem movieForType = JSON.parseObject(jsonArray.getJSONObject(i)
+                                            .toString(), HMoiveItem.class);
                                     list.add(movieForType);
                                 }
                                 movieForTypeAdapter.replaceAll(list);
@@ -197,7 +196,7 @@ public class AllMoiveForHotActivity extends VBaseActivity implements ScrollBotto
 
     @Override
     public void onItemViewClick(View view, int position) {
-
+        FilmDetailsAct.Launch(this,((HMoiveItem) view.getTag()).getId(),((HMoiveItem) view.getTag()).getVedio_url());
     }
 
     @Override

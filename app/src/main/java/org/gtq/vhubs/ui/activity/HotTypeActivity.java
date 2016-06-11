@@ -1,22 +1,17 @@
 package org.gtq.vhubs.ui.activity;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.videodemo.FilmDetailsAct;
 
 import org.gtq.vhubs.R;
 import org.gtq.vhubs.core.VApplication;
 import org.gtq.vhubs.dao.ClassificationItem;
-import org.gtq.vhubs.dao.MovieForType;
-import org.gtq.vhubs.ui.adapter.ClassificationAdapter;
+import org.gtq.vhubs.dao.HMoiveItem;
 import org.gtq.vhubs.ui.adapter.MovieForTypeAdapter;
 import org.gtq.vhubs.utils.HttpUtils;
 import org.json.JSONArray;
@@ -35,10 +30,8 @@ import rx.schedulers.Schedulers;
 import support.ui.activity.VBaseActivity;
 import support.ui.adapter.SetBaseAdapter;
 import support.ui.frt.BaseFrt;
-import support.ui.image.GImageLoader;
 import support.ui.view.PulldownableListView;
 import support.ui.view.ScrollBottomLoadListView;
-import support.utils.SystemUtils;
 
 /**
  * Created by guotengqian on 2016/6/1.
@@ -58,11 +51,9 @@ public class HotTypeActivity extends VBaseActivity implements ScrollBottomLoadLi
         typeId = getIntent().getStringExtra(BaseFrt.FRTTAG_NAME);
         setContentView(R.layout.activity_hottype);
         lv = (ScrollBottomLoadListView) findViewById(R.id.lv);
-
         movieForTypeAdapter = new MovieForTypeAdapter(this, this);
         lv.setAdapter(movieForTypeAdapter);
         lv.startRun();
-
         lv.setOnScrollBottomListener(this);
         lv.setOnPullDownListener(this);
     }
@@ -98,10 +89,10 @@ public class HotTypeActivity extends VBaseActivity implements ScrollBottomLoadLi
                                 page++;
                                 JSONArray jsonArray = bean.getJSONObject("data").getJSONArray("movices");
                                 lv.hasMoreLoad(bean.getJSONObject("data").getBoolean("hasMore"));
-                                List<MovieForType> list = new ArrayList<MovieForType>();
+                                List<HMoiveItem> list = new ArrayList<HMoiveItem>();
                                 for (int i = 0; i < jsonArray.length(); i++) {
-                                    MovieForType movieForType = JSON.parseObject(jsonArray.getJSONObject(i)
-                                            .toString(), MovieForType.class);
+                                    HMoiveItem movieForType = JSON.parseObject(jsonArray.getJSONObject(i)
+                                            .toString(), HMoiveItem.class);
                                     list.add(movieForType);
                                 }
                                 movieForTypeAdapter.addAll(list);
@@ -152,10 +143,10 @@ public class HotTypeActivity extends VBaseActivity implements ScrollBottomLoadLi
                                 page=2;
                                 JSONArray jsonArray = bean.getJSONObject("data").getJSONArray("movices");
                                 lv.hasMoreLoad(bean.getJSONObject("data").getBoolean("hasMore"));
-                                List<MovieForType> list = new ArrayList<MovieForType>();
+                                List<HMoiveItem> list = new ArrayList<HMoiveItem>();
                                 for (int i = 0; i < jsonArray.length(); i++) {
-                                    MovieForType movieForType = JSON.parseObject(jsonArray.getJSONObject(i)
-                                            .toString(), MovieForType.class);
+                                    HMoiveItem movieForType = JSON.parseObject(jsonArray.getJSONObject(i)
+                                            .toString(), HMoiveItem.class);
                                     list.add(movieForType);
                                 }
                                 movieForTypeAdapter.replaceAll(list);
@@ -180,7 +171,7 @@ public class HotTypeActivity extends VBaseActivity implements ScrollBottomLoadLi
 
     @Override
     public void onItemViewClick(View view, int position) {
-
+        FilmDetailsAct.Launch(this,((HMoiveItem) view.getTag()).getId(),((HMoiveItem) view.getTag()).getVedio_url());
     }
 
     @Override

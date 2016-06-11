@@ -39,7 +39,7 @@ public  class HMoiveAdapter<T> extends SetBaseAdapter<T> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         if (convertView == null) {
             holder = new ViewHolder();
@@ -57,11 +57,19 @@ public  class HMoiveAdapter<T> extends SetBaseAdapter<T> {
             holder = (ViewHolder) convertView.getTag();
         }
         HMoiveItem moiveItem = null;
+
         if(getItem(position) instanceof HMoiveItem){
             moiveItem = (HMoiveItem) getItem(position);
         }else if(getItem(position) instanceof FavoritesMoive){
             moiveItem = ((FavoritesMoive) getItem(position)).gethMoiveItem();
         }
+        holder.all_ll.setTag(moiveItem);
+        holder.all_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemViewClickListener.onItemViewClick(v,position);
+            }
+        });
         VApplication.setBitmapEx(holder.image, moiveItem.getCover_img());
         holder.name.setText(moiveItem.getName());
         holder.good.setText(moiveItem.getGrade());

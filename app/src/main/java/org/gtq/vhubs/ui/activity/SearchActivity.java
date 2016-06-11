@@ -19,9 +19,7 @@ import com.alibaba.fastjson.JSON;
 
 import org.gtq.vhubs.R;
 import org.gtq.vhubs.core.VApplication;
-import org.gtq.vhubs.dao.ClassificationItem;
 import org.gtq.vhubs.dao.HotKey;
-import org.gtq.vhubs.dao.MovieForType;
 import org.gtq.vhubs.utils.HttpUtils;
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -8,6 +8,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.videodemo.FilmDetailsAct;
 
 import org.gtq.vhubs.R;
 import org.gtq.vhubs.core.VApplication;
@@ -132,7 +133,7 @@ public class FavoritesActivity extends VBaseActivity implements View.OnClickList
 
     @Override
     public void onItemViewClick(View view, int position) {
-
+        FilmDetailsAct.Launch(this,((HMoiveItem) view.getTag()).getId(),((HMoiveItem) view.getTag()).getVedio_url());
     }
 
     @Override

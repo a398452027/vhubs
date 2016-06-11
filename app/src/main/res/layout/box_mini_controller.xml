@@ -9,14 +9,14 @@
 
     <ImageButton
         android:id="@+id/btnPlayOrPausePortrait"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/film_player_padding_left"
         android:background="@null"
         android:clickable="false"
         android:contentDescription="@string/app_name"
-        android:scaleType="fitCenter"
+        android:scaleType="fitXY"
         android:src="@drawable/selector_btn_par_play" />
 
     <LinearLayout
@@ -60,7 +60,7 @@
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:text="00:00"
-                android:textColor="@color/nor_mini_play_time"
+                android:textColor="@color/text_pink"
                 android:textSize="@dimen/sp_film_player_time" />
 
             <TextView
@@ -71,7 +71,7 @@
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:text="/"
-                android:textColor="@color/nor_mini_play_time"
+                android:textColor="@color/text_pink"
                 android:textSize="@dimen/sp_film_player_time" />
 
             <TextView
@@ -82,20 +82,21 @@
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:text="00:00"
-                android:textColor="@color/nor_mini_play_time"
+                android:textColor="@color/text_pink"
                 android:textSize="@dimen/sp_film_player_time" />
         </LinearLayout>
     </LinearLayout>
 
     <ImageButton
         android:id="@+id/btnFullScreen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/film_player_padding_right"
         android:background="@null"
+        android:scaleType="fitXY"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/selector_btn_fullscreen" />
+        android:src="@mipmap/full_film" />
 
 </RelativeLayout>

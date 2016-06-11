@@ -146,4 +146,16 @@ public class Function_Utility {
         }
         return verCode;
     }
+    /**
+     * 获得版本号
+     */
+    public static String getVerName(Context context) {
+        String verCode ="";
+        try {
+            verCode = context.getPackageManager().getPackageInfo("org.gtq.vhubs", 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+
+        }
+        return verCode;
+    }
 }

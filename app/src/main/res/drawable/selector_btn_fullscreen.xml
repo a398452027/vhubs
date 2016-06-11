@@ -2,7 +2,7 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@mipmap/video_fullscreen_icon_normal" android:state_pressed="false" />
-    <item android:drawable="@mipmap/video_fullscreen_icon_pressed" android:state_pressed="true" />
+    <item android:drawable="@mipmap/full_film" android:state_pressed="false" />
+    <item android:drawable="@mipmap/full_film" android:state_pressed="true" />
 
 </selector>
