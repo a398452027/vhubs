@@ -59,10 +59,13 @@ public class SearchResultActivity extends VBaseActivity implements View.OnClickL
     TextView fail_tv;
 
     @Override
+    protected void setmContentView() {
+        setContentView(R.layout.activity_searchresult);
+    }
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         key = getIntent().getStringExtra("key");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_searchresult);
         initView();
 
 

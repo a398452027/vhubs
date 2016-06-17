@@ -48,7 +48,7 @@ public class AllMoiveForHotActivity extends VBaseActivity implements ScrollBotto
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_allmoiveforhot);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(getString(R.string.hot_movie));
         setSupportActionBar(toolbar);
@@ -63,6 +63,11 @@ public class AllMoiveForHotActivity extends VBaseActivity implements ScrollBotto
         lv.setIsAutoLoad(true);
         lv.setOnScrollBottomListener(this);
         lv.setOnPullDownListener(this);
+    }
+
+    @Override
+    protected void setmContentView() {
+        setContentView(R.layout.activity_allmoiveforhot);
     }
 
     private void loadMoreData() {

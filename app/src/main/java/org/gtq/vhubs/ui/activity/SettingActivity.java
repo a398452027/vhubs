@@ -19,9 +19,12 @@ public class SettingActivity extends VBaseActivity {
     TextView current_ver;
     TextView about;
     @Override
+    protected void setmContentView() {
+        setContentView(R.layout.activity_setting);
+    }
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
         updata=(LinearLayout)findViewById(R.id.updata);
         current_ver=(TextView)findViewById(R.id.current_ver);
         about=(TextView) findViewById(R.id.about);

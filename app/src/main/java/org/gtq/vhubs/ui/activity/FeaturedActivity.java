@@ -64,11 +64,14 @@ public class FeaturedActivity extends VBaseActivity implements ScrollBottomLoadL
     HomeListAdapter homeListAdapter;
 
     TextView name;
+    @Override
+    protected void setmContentView() {
+        setContentView(R.layout.activity_featured);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_featured);
 
         lv = (PullToRefreshListView) findViewById(R.id.lv);
 

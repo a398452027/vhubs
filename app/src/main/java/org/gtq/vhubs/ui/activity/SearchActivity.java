@@ -66,11 +66,14 @@ public class SearchActivity extends VBaseActivity implements View.OnClickListene
 
     LinearLayout history_title;
 
-
+    @Override
+    protected void setmContentView() {
+        setContentView(R.layout.activity_search);
+    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+
         initView();
 
 
@@ -111,6 +114,24 @@ public class SearchActivity extends VBaseActivity implements View.OnClickListene
         history_tv06 = (TextView) findViewById(R.id.history_tv06);
         history_tv06.setOnClickListener(this);
 
+
+        initHistorySearch();
+
+        hot_tv01 = (TextView) findViewById(R.id.hot_tv01);
+        hot_tv01.setOnClickListener(this);
+        hot_tv02 = (TextView) findViewById(R.id.hot_tv02);
+        hot_tv02.setOnClickListener(this);
+        hot_tv03 = (TextView) findViewById(R.id.hot_tv03);
+        hot_tv03.setOnClickListener(this);
+        hot_tv04 = (TextView) findViewById(R.id.hot_tv04);
+        hot_tv04.setOnClickListener(this);
+        hot_tv05 = (TextView) findViewById(R.id.hot_tv05);
+        hot_tv05.setOnClickListener(this);
+        hot_tv06 = (TextView) findViewById(R.id.hot_tv06);
+        hot_tv06.setOnClickListener(this);
+        loadHotKeyForNet();
+    }
+    private void initHistorySearch(){
         try {
             JSONArray jsonArray = new JSONArray(getSharedPreferences("sp", Context.MODE_PRIVATE).getString(SP_SEARCH, "[]"));
             for (int i = jsonArray.length() - 1; i >= 0; i--) {
@@ -197,21 +218,6 @@ public class SearchActivity extends VBaseActivity implements View.OnClickListene
         } catch (JSONException e) {
 
         }
-
-
-        hot_tv01 = (TextView) findViewById(R.id.hot_tv01);
-        hot_tv01.setOnClickListener(this);
-        hot_tv02 = (TextView) findViewById(R.id.hot_tv02);
-        hot_tv02.setOnClickListener(this);
-        hot_tv03 = (TextView) findViewById(R.id.hot_tv03);
-        hot_tv03.setOnClickListener(this);
-        hot_tv04 = (TextView) findViewById(R.id.hot_tv04);
-        hot_tv04.setOnClickListener(this);
-        hot_tv05 = (TextView) findViewById(R.id.hot_tv05);
-        hot_tv05.setOnClickListener(this);
-        hot_tv06 = (TextView) findViewById(R.id.hot_tv06);
-        hot_tv06.setOnClickListener(this);
-        loadHotKeyForNet();
     }
 
     private void loadHotKeyForNet() {
@@ -361,7 +367,8 @@ public class SearchActivity extends VBaseActivity implements View.OnClickListene
                 finish();
             }
         } else if (view.getId() == R.id.clear) {
-
+            getSharedPreferences("sp", Context.MODE_PRIVATE).edit().putString(SP_SEARCH,"[]").commit();
+            initHistorySearch();
         } else if (view instanceof TextView) {
             SearchResultActivity.Launch(this, ((TextView) view).getText().toString());
             finish();

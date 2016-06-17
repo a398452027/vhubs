@@ -53,7 +53,6 @@ public class FavoritesActivity extends VBaseActivity implements View.OnClickList
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_favorites);
         pb_ll = (LinearLayout) findViewById(R.id.pb_ll);
         fail_tv = (TextView) findViewById(R.id.fail_tv);
         lv = (ListView) findViewById(R.id.lv);
@@ -66,6 +65,10 @@ public class FavoritesActivity extends VBaseActivity implements View.OnClickList
     public void Resume() {
         super.Resume();
         loadForDb();
+    }
+    @Override
+    protected void setmContentView() {
+        setContentView(R.layout.activity_favorites);
     }
 
     private void sort(List<FavoritesMoive> list) {

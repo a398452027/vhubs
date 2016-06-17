@@ -22,7 +22,6 @@ import support.utils.SystemUtils;
  */
 public class OneTypeActivity extends ViewpageActivity {
     String id;
-    View status_bar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,10 +37,6 @@ public class OneTypeActivity extends ViewpageActivity {
         select_iv0.getBackground().setAlpha(255);
         select_iv1.getBackground().setAlpha(0);
 
-        status_bar = findViewById(R.id.status_bar);
-        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) status_bar.getLayoutParams();
-        lp.height = SystemUtils.getStatusBarHeight(this);
-        status_bar.setLayoutParams(lp);
     }
 
     @Override

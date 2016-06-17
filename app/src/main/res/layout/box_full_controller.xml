@@ -142,7 +142,7 @@
         android:progress="0"
         android:progressDrawable="@drawable/style_seekbar_time"
         android:secondaryProgress="0"
-        android:thumb="@mipmap/videobar_point_icon_normal"
+        android:thumb="@mipmap/bofangshijiandian"
         android:thumbOffset="6dip" />
 
 </RelativeLayout>

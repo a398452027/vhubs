@@ -48,7 +48,6 @@ import support.utils.SystemUtils;
 
 public class MainActivity extends VBaseActivity implements AdapterView.OnItemClickListener {
 
-    View status_bar;
     private ListView mLvLeftMenu;
     DrawerLayout drawer;
     List<Fragment> fragments;
@@ -61,9 +60,9 @@ public class MainActivity extends VBaseActivity implements AdapterView.OnItemCli
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(R.string.nav_home);
@@ -85,10 +84,6 @@ public class MainActivity extends VBaseActivity implements AdapterView.OnItemCli
         mLvLeftMenu.addHeaderView(inflater.inflate(R.layout.nav_header_main, mLvLeftMenu, false));
         mLvLeftMenu.setAdapter(new MenuItemAdapter(this));
         mLvLeftMenu.setOnItemClickListener(this);
-        status_bar = findViewById(R.id.status_bar);
-        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) status_bar.getLayoutParams();
-        lp.height = SystemUtils.getStatusBarHeight(this);
-        status_bar.setLayoutParams(lp);
 
         fragments = new ArrayList<>();
         Fragment home = BaseFrtFactory.createForActivityView(
@@ -112,6 +107,11 @@ public class MainActivity extends VBaseActivity implements AdapterView.OnItemCli
 //        fragmentManager.beginTransaction().replace(R.id.content_main, fragments.get(0)).commit();
         stateCheck(savedInstanceState);
         Function_Utility.checkUpdate(this);
+    }
+
+    @Override
+    protected void setmContentView() {
+        setContentView(R.layout.activity_main);
     }
 
 

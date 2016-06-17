@@ -47,7 +47,6 @@ public class ClassificationActivity extends VBaseActivity implements ScrollBotto
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_classification);
         lv = (PullToRefreshListView) findViewById(R.id.lv);
 
         headView = LayoutInflater.from(this).inflate(R.layout.view_classification_head, null);
@@ -58,6 +57,10 @@ public class ClassificationActivity extends VBaseActivity implements ScrollBotto
 
 
         lv.setOnPullDownListener(this);
+    }
+    @Override
+    protected void setmContentView() {
+        setContentView(R.layout.activity_classification);
     }
 
     private void loadDataFornet() {

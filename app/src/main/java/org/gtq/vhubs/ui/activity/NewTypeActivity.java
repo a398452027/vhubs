@@ -43,12 +43,14 @@ public class NewTypeActivity extends VBaseActivity  implements ScrollBottomLoadL
     MovieForTypeAdapter movieForTypeAdapter;
     String typeId;
     int page;
-
+    @Override
+    protected void setmContentView() {
+        setContentView(R.layout.activity_hottype);
+    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         typeId = getIntent().getStringExtra(BaseFrt.FRTTAG_NAME);
-        setContentView(R.layout.activity_hottype);
         lv = (ScrollBottomLoadListView) findViewById(R.id.lv);
 
         movieForTypeAdapter = new MovieForTypeAdapter(this, this);

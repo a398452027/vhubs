@@ -9,7 +9,7 @@
         android:drawable="@mipmap/play_seekbar_white"/>
     <item
         android:id="@android:id/progress"
-        android:drawable="@mipmap/play_seekbar_blue">
+        android:drawable="@mipmap/seebar_blue">
     </item>
 
 </layer-list>

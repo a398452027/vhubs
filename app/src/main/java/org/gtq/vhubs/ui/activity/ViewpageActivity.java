@@ -29,10 +29,10 @@ public abstract class ViewpageActivity extends VBaseActivity {
 
     protected ArrayList<Fragment> fragmentsList;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setmContentView();
         tab_0 = (RelativeLayout) findViewById(R.id.tab_0);
         tab_1 = (RelativeLayout) findViewById(R.id.tab_1);
         vp = (ViewPager) findViewById(R.id.vp);
@@ -60,7 +60,6 @@ public abstract class ViewpageActivity extends VBaseActivity {
             }
         });
     }
-    protected abstract void setmContentView();
 
     protected  ViewPager.OnPageChangeListener initOnPageChangeListener(){
         return new ViewPager.OnPageChangeListener() {

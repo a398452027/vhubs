@@ -45,11 +45,14 @@ public class HistoryActivity extends VBaseActivity implements SetBaseAdapter.OnI
     TextView fail_tv;
     StickyListHeadersListView lv;
     HistoryAdapter adapter;
+    @Override
+    protected void setmContentView() {
+        setContentView(R.layout.activity_history);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history);
         pb_ll = (LinearLayout) findViewById(R.id.pb_ll);
         fail_tv = (TextView) findViewById(R.id.fail_tv);
         lv = (StickyListHeadersListView) findViewById(R.id.lv);

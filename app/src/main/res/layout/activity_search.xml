@@ -65,10 +65,11 @@
             android:textColor="@color/text_white" />
 
         <ImageView
+            android:src="@mipmap/search_delete"
             android:id="@+id/clear"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:visibility="visible" />
 
     </LinearLayout>
 

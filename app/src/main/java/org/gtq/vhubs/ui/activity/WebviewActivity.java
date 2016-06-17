@@ -22,19 +22,20 @@ import support.ui.activity.VBaseActivity;
 
 public class WebviewActivity extends VBaseActivity {
 
-	View status_bar;
 	private WebView webview;
 	private ProgressBar loadingProgress;
 
 	String url;
 	@SuppressLint("SetJavaScriptEnabled")
 	@Override
+	protected void setmContentView() {
+		setContentView(R.layout.activity_webview);
+	}
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		url=getIntent().getStringExtra("url");
 		String title =getIntent().getStringExtra("title");
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_webview);
-
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		toolbar.setTitle(title);
 		setSupportActionBar(toolbar);

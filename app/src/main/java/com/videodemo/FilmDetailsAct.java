@@ -51,6 +51,7 @@ import com.common.ui.base.BaseAct;
 
 import org.gtq.vhubs.R;
 import org.gtq.vhubs.core.VApplication;
+import org.gtq.vhubs.dao.FavoritesMoive;
 import org.gtq.vhubs.dao.HMoiveItem;
 import org.gtq.vhubs.ui.adapter.XFragmentAdapter;
 import org.gtq.vhubs.ui.fragment.MoreMoiveFragment;
@@ -72,6 +73,7 @@ import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
+import support.db.XDB;
 import support.utils.SystemUtils;
 
 
@@ -232,6 +234,8 @@ public class FilmDetailsAct extends BaseAct implements
 
     HMoiveItem currentMoive;
 
+    boolean isFavorites = false;
+
     private void initPager() {
         tab_0 = (RelativeLayout) findViewById(R.id.tab_0);
         tab_1 = (RelativeLayout) findViewById(R.id.tab_1);
@@ -239,11 +243,22 @@ public class FilmDetailsAct extends BaseAct implements
         select_iv0 = (ImageView) findViewById(R.id.select_iv0);
         select_iv1 = (ImageView) findViewById(R.id.select_iv1);
         favorites = (ImageView) findViewById(R.id.favorites);
+
         favorites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 if (currentMoive != null) {
-                    DBUtil.addToFavorites(currentMoive);
+                    if (isFavorites) {
+                        favorites.setImageResource(R.mipmap.favorites);
+                        FavoritesMoive favoritesMoive = new FavoritesMoive(currentMoive, 0);
+                        XDB.getInstance().delete(favoritesMoive, false);
+                    } else {
+                        favorites.setImageResource(R.mipmap.shoucang2);
+                        DBUtil.addToFavorites(currentMoive);
+                    }
+                    isFavorites = !isFavorites;
                 }
             }
         });
@@ -365,6 +380,12 @@ public class FilmDetailsAct extends BaseAct implements
                                     }
                                     watch_time.setText(currentMoive.getShow_play_time());
                                     DBUtil.addToHistory(currentMoive);
+                                    isFavorites = XDB.getInstance().readById(currentMoive.getmId(), FavoritesMoive.class, false) != null;
+                                    if (isFavorites) {
+                                        favorites.setImageResource(R.mipmap.shoucang2);
+                                    } else {
+                                        favorites.setImageResource(R.mipmap.favorites);
+                                    }
                                 }
                             } catch (JSONException e) {
                                 VApplication.toast(getString(R.string.net_fail));
@@ -1148,7 +1169,7 @@ public class FilmDetailsAct extends BaseAct implements
                         // mSoundWindow.showAtLocation(videoView, Gravity.LEFT
                         // | Gravity.CENTER_VERTICAL, 40, 0);
                         mSoundWindow.showAtLocation(videoView, Gravity.CENTER
-                              , 0, 0);
+                                , 0, 0);
                         mSoundWindow.update();
                     }
                     delayHideController(3000);
